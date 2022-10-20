@@ -10,7 +10,7 @@ export default function Book ({title, author, isbn}) {
   <div style={ bookStyle }>
   
     <div>
-      {title}    
+      {title}
     </div>
   
     <div>

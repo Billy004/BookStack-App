@@ -18,5 +18,19 @@ export default class LibraryModel {
     }
   }
 
+  async addBook(data) {
+
+    // TODO Check if book is already added
+
+    const requestOptions = {
+      method : 'POST',
+      headers : { 'Content-Type': 'application/json' },
+      body : JSON.stringify(data)
+    }
+
+    const googleResponse = await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=addBook', requestOptions)
+    const result = await googleResponse.json()
+  }
+
 
 }

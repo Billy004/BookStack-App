@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom'
 
-export default function Navbar () {
+export default function Header() {
 
   const navStyle = {
     display : 'flex',
     alignItems : 'center',
     width : '100%',
     padding : '1rem',
+    backgroundColor : '#0F0A44',
+    color : '#fff',
+    borderRadius : '0.3rem',
   }
 
   const logoStyle = {
-
+    fontSize : '1.7rem',
   }
 
   const ulStyle = {
@@ -20,8 +23,9 @@ export default function Navbar () {
     listStyleType : 'none',
   }
 
-  const linkStyle = {
+  let linkStyle = {
     textDecoration : 'none',
+    color : '#fff',
   }
 
   return(

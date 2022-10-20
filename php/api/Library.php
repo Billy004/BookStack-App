@@ -2,7 +2,7 @@
 // required headers
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Methods: *");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
@@ -42,8 +42,12 @@ class Library {
     return $this->stmt->fetch(PDO::FETCH_OBJ);
   }
 
-  public function addBook() {
-
+  public function addBook($newBook) {
+    $sql = "
+    INSERT INTO library (isbn, title, author, pages, user_id, is_read, cover, date) 
+    VALUES (:isbn, :title, :author, :pages, :userId, :bookIsRead, :cover, :date)";
+    $this->stmt = $this->dbh->prepare($sql);
+    $this->stmt->execute($newBook);
   }
 
   public function deleteBook() {
@@ -68,6 +72,16 @@ if ($action == 'getBook' && !empty($isbn)) {
 } elseif ($action == 'getLibrary' ) {
 
   echo json_encode($library->getLibrary(), JSON_PRETTY_PRINT);
+
+} elseif ($action == 'addBook') {
+
+  $json = file_get_contents("php://input");
+  $newBook = json_decode($json, true);
+
+  $library->addBook($newBook);
+
+  echo json_encode($newBook);
+
 
 } else {
 
