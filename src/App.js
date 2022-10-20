@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
+
+
+  async function getStuff() {
+    try {
+
+      const data = await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/models/library.php')
+
+      let books = await data.json()
+      
+      console.log(books)
+
+      return data
+      // return data
+    } catch(err) {
+        return false
+    }
+
+  }
+
+  getStuff()
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {/* {stuff} */}
     </div>
   );
 }
