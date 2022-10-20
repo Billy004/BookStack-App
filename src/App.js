@@ -1,31 +1,50 @@
 
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import './css/main.css'
+
+
+// Views
+import Home from "./views/Home";
+import Library from "./views/Library";
+import Users from "./views/Users";
+import About from "./views/About";
+
+import Navbar from "./components/Navbar";
+import FlashMsg from "./components/FlashMsg";
+import Footer from "./components/Footer";
+
+
 function App() {
+ 
 
-
-  async function getStuff() {
-    try {
-
-      const data = await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/models/library.php')
-
-      let books = await data.json()
-      
-      console.log(books)
-
-      return data
-      // return data
-    } catch(err) {
-        return false
-    }
-
-  }
-
-  getStuff()
 
 
   return (
-    <div className="App">
-        {/* {stuff} */}
+    <Router>
+
+    <div className="App container">
+
+      <Navbar />
+
+      <FlashMsg />
+
+      <Routes>
+
+        <Route path="/" element={<Home />} />
+
+        <Route path="/library" element={<Library />} />
+
+        <Route path="Users" element={<Users />} />
+
+        <Route path="About" element={<About />} />
+      </Routes>
+
+      <Footer />
+
     </div>
+    </Router>
   );
 }
 
