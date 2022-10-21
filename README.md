@@ -10,6 +10,7 @@ More Info coming soon
 
 #### TODO
 - UI/UX
+  - make a kickass css layout
   - Active Nav Link
 - users
   - sign up
@@ -17,6 +18,7 @@ More Info coming soon
   - log out
 - user settings (sort, filter)
 - search library
+- toggle book read/unread
 - book more info modal
 - refactor model/api
   - LibraryModel.js -> make Constants for fetch URL
