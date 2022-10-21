@@ -21,6 +21,10 @@ body {
   padding-inline : 0.5rem;
 }
 
+img {
+  /* max-width: 200px; */
+}
+
 
 nav ul { display : none; }
 

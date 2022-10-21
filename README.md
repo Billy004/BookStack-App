@@ -7,3 +7,17 @@ BookStack is a custom Full-Stack web app that I programmed from the ground up as
 Users and books are stored in a MYSQL database, which is returned to an API with PHP. React then dynamically access this API to implement basic CRUD operations.
 
 More Info coming soon
+
+#### TODO
+- UI/UX
+  - Active Nav Link
+- users
+  - sign up
+  - log in 
+  - log out
+- user settings (sort, filter)
+- search library
+- book more info modal
+- refactor model/api
+  - LibraryModel.js -> make Constants for fetch URL
+  - Put reusable php code in Database class and extend

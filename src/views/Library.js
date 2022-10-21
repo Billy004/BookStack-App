@@ -49,7 +49,7 @@ export default function Library ( { setFlash } ) {
 
 
   return(
-  <div>
+  <div className="slide-down">
 
     <div style={ libraryActionsStyle }>
 
