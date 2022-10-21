@@ -15,6 +15,9 @@ class Library {
   private $dbh;
   private $stmt;
 
+
+
+
   public function __construct() {
 
     $options = array(
@@ -29,10 +32,16 @@ class Library {
     }
   }
 
+
+
+
   public function getLibrary() {
     $this->stmt = $this->dbh->query('SELECT * FROM library');
     return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+
+
 
   public function getBook($isbn) {
 
@@ -42,36 +51,58 @@ class Library {
     return $this->stmt->fetch(PDO::FETCH_OBJ);
   }
 
+
+
+
   public function addBook($newBook) {
+
     $sql = "
-    INSERT INTO library (isbn, title, author, pages, user_id, is_read, cover, date) 
+    INSERT INTO library (isbn, title, author, pages, user_id, is_read, cover, date_added) 
     VALUES (:isbn, :title, :author, :pages, :userId, :bookIsRead, :cover, :date)";
     $this->stmt = $this->dbh->prepare($sql);
     $this->stmt->execute($newBook);
   }
 
-  public function deleteBook() {
 
+
+
+  public function deleteBook($isbn) {
+    $bookToDelete = ['isbn' => $isbn];
+    $this->stmt = $this->dbh->prepare("DELETE FROM library WHERE isbn = :isbn");
+    $this->stmt->execute($bookToDelete);
   }
+
+
+
 
   public function searchLibrary() {
 
   }
 }
 
-$library = new Library;
 
+
+
+$library = new Library;
 $action = !empty($_GET['action']) ? $_GET['action'] : false;
 $isbn = !empty($_GET['isbn']) ? $_GET['isbn'] : false;
 
 
+
+
 if ($action == 'getBook' && !empty($isbn)) {
 
-  echo json_encode($library->getBook($isbn));
+  echo json_encode($library->getBook($isbn),JSON_PRETTY_PRINT);
+
+
+
 
 } elseif ($action == 'getLibrary' ) {
 
   echo json_encode($library->getLibrary(), JSON_PRETTY_PRINT);
+
+
+
 
 } elseif ($action == 'addBook') {
 
@@ -81,6 +112,19 @@ if ($action == 'getBook' && !empty($isbn)) {
   $library->addBook($newBook);
 
   echo json_encode($newBook);
+
+
+
+
+} elseif ($action == 'deleteBook') {
+
+  if (!empty($isbn) && $library->getBook($isbn)) {
+      $library->deleteBook($isbn);
+      echo $isbn;
+  }
+  echo 'deleting book';
+
+
 
 
 } else {

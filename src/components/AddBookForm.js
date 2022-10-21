@@ -4,7 +4,10 @@ import { getGoogleBookInfo } from "../utils/google"
 export default function AddBookForm ( { LIBRARYMODEL, setLibrary, showAddBookForm,toggleShowAddBookForm, setFlash } ) {
 
   const addBookStyle = {
+    marginInline : '1rem',
     padding : '1rem',
+    border : '1px solid #ddd',
+    borderRadius : '1rem',
   }
 
   const labelStyle = {
@@ -20,10 +23,20 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, showAddBookFor
     cursor : 'pointer',
   }
 
-    async function handleSubmit(e) {
+  async function handleSubmit(e) {
+
     e.preventDefault()
+
     let isbn = e.target[0].value
     let bookIsRead = e.target[1].checked
+
+    if (!isbn) {
+      setFlash({
+        message : 'Please Enter an ISBN',
+        type : 'fail'
+      })
+      return
+    }
 
     const googleResponse = await getGoogleBookInfo(isbn)
 
@@ -47,19 +60,38 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, showAddBookFor
       userId : 1,
     }
 
-    await LIBRARYMODEL.addBook(newBook)
+    console.log(newBook.date)
 
+    // Add Book to DB. If 'duplicate' is returned let the user know the book was already added
+    if (await LIBRARYMODEL.addBook(newBook) === 'duplicate') {
+      setFlash({
+        message : `${googleResponse.title} is already in your library. (ISBN# ${isbn})`, 
+        type : 'fail',
+        link : `#${isbn}`,
+        linkText : 'View Book'
+      })
+      return
+    }
+
+    // Update Library in UI
     const updatedLibrary = await LIBRARYMODEL.getLibrary()
     setLibrary(updatedLibrary)
 
+    // Close Add Book Form
     toggleShowAddBookForm(!showAddBookForm)
 
-    setFlash({message : `${googleResponse.title} Added Successfully`, type : 'success'})
+    // Update flash message
+    setFlash({
+      message : `${ googleResponse.title } Added Successfully`,
+      type : 'success',
+      link : `#${ isbn }`,
+      linkText : 'View Book'
+    })
 
   }
 
   return(
-  <div style={ addBookStyle }>
+  <div style={ addBookStyle } className="slide-down">
 
     <h2 className="mb2">Add A New Book</h2>
 

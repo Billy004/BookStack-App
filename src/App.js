@@ -1,5 +1,5 @@
 
-
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import './css/main.css'
@@ -14,7 +14,6 @@ import About from "./views/About";
 import Header from "./components/Header";
 import FlashMsg from "./components/FlashMsg";
 import Footer from "./components/Footer";
-import { useState } from "react";
 
 
 function App() {

@@ -1,0 +1,28 @@
+
+.fade-out { animation: fade-out 10s linear both; }
+
+@keyframes fade-out {
+  from { opacity : 1; }
+  70% { opacity : 1; }
+  to { opacity : 0; }
+}
+
+.slide-down { animation: slide-down 500ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden; }
+
+@keyframes slide-down {
+  from {
+    opacity : 0;
+    /* transform: translateY(-25%); */
+    max-height : 0;
+  }
+  to {
+    opacity : 1;
+    max-height : 500px;
+    /* transform: translateY(0); */
+  }
+}
+
+.hover-expand { transition: all 300ms ease-in; transform-origin: bottom; }
+.hover-expand:hover {
+  transform: scale(1.2);
+}

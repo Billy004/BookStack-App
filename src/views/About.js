@@ -6,6 +6,7 @@ export default function About () {
 
   const pStyle = {
     marginBottom : '1.7rem',
+    maxWidth : '60ch',
     lineHeight : '1.7rem',
   }
 
@@ -13,7 +14,7 @@ export default function About () {
   <div style={ aboutStyle }>
   
   <p style={ pStyle }>
-    Version number 1.0.0
+    <strong>Version number 1.0.0</strong>
   </p>
 
   <p style={ pStyle }>

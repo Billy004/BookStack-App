@@ -18,9 +18,14 @@ export default class LibraryModel {
     }
   }
 
+
+
+
   async addBook(data) {
 
     // TODO Check if book is already added
+    let book = await this.getBook(data.isbn)
+    if(book) return 'duplicate'
 
     const requestOptions = {
       method : 'POST',
@@ -29,8 +34,30 @@ export default class LibraryModel {
     }
 
     const googleResponse = await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=addBook', requestOptions)
-    const result = await googleResponse.json()
+
   }
 
+
+  
+
+  async getBook(isbn) {
+    const book = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=getBook&isbn=${isbn}`)
+
+    return book.json()
+  }
+
+
+
+  async deleteBook(isbn) {
+    try {
+
+      const deletedBook = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=deleteBook&isbn=${isbn}`) 
+      
+      if (deletedBook.status === 200) return true
+
+    } catch (error) {
+      return false
+    }
+  }
 
 }

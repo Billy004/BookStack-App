@@ -17,7 +17,6 @@ export default function Header() {
   }
 
   const ulStyle = {
-    display : 'flex',
     gap : '1rem',
     marginLeft : 'auto',
     listStyleType : 'none',

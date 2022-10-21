@@ -3,12 +3,12 @@ import Book from "../components/Book";
 import AddBookForm from "../components/AddBookForm";
 import LibraryModel from '../model/LibraryModel'
 
-export default function Library ( {flash, setFlash } ) {
+export default function Library ( { setFlash } ) {
 
   const libraryStyle = {
     padding : '1rem',
     display : 'grid',
-    gridTemplateColumns : 'repeat(auto-fit, minmax(200px, 1fr))',
+    gridTemplateColumns : 'repeat(auto-fit, minmax(100px, 1fr))',
     gap : '1rem',
   }
 
@@ -45,12 +45,20 @@ export default function Library ( {flash, setFlash } ) {
 
   const [showAddBookForm, toggleShowAddBookForm] = useState(false)
 
+
+
+
   return(
   <div>
 
     <div style={ libraryActionsStyle }>
 
-      <button onClick={ () => toggleShowAddBookForm(!showAddBookForm) } style={ addBookBtnStyle }>Add Book</button>
+      <button 
+        onClick={ () => toggleShowAddBookForm(!showAddBookForm) } 
+        style={ addBookBtnStyle }
+      >
+        { !showAddBookForm ? 'Add Book' : 'Close'}
+      </button>
 
     </div>
 
@@ -69,9 +77,10 @@ export default function Library ( {flash, setFlash } ) {
       { 
       library.map((book, index) => 
         <Book 
-          title={ book.title }
-          author={ book.author }
-          isbn={ book.isbn }
+          LIBRARYMODEL={ LIBRARYMODEL }
+          setLibrary={ setLibrary }
+          setFlash={ setFlash }
+          bookData={ book }
           key={ index }
         />
       ) 
