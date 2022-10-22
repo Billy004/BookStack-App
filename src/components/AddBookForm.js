@@ -1,7 +1,7 @@
 
 import { getGoogleBookInfo } from "../utils/google"
 
-export default function AddBookForm ( { LIBRARYMODEL, setLibrary, showAddBookForm,toggleShowAddBookForm, setFlash } ) {
+export default function AddBookForm ( { LIBRARYMODEL, setLibrary, userAction, setUserAction, setFlash } ) {
 
   const addBookStyle = {
     marginInline : '1rem',
@@ -78,7 +78,8 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, showAddBookFor
     setLibrary(updatedLibrary)
 
     // Close Add Book Form
-    toggleShowAddBookForm(!showAddBookForm)
+    // toggleShowAddBookForm(!showAddBookForm)
+    setUserAction(false)
 
     // Update flash message
     setFlash({

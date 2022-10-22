@@ -12,14 +12,15 @@ More Info coming soon
 - UI/UX
   - make a kickass css layout
   - Active Nav Link
+  - light/dark mode
 - users
   - sign up
   - log in 
   - log out
 - user settings (sort, filter)
-- search library
 - toggle book read/unread
 - book more info modal
+- use res.ok for fetch statements
 - refactor model/api
-  - LibraryModel.js -> make Constants for fetch URL
+  - LibraryModel.js -> make Constants for fetch URLs
   - Put reusable php code in Database class and extend

@@ -17,7 +17,8 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
 
   const coverImgStyle = {
     width : '100%',
-    aspectRatio : '1 / 1.5', 
+    maxWidth : '100%',
+    aspectRatio : '1 / 1.3', 
     objectFit : 'cover',
     objectPosition : 'top',
     cursor : 'pointer',

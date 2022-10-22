@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import Book from "../components/Book";
 import AddBookForm from "../components/AddBookForm";
+import SearchBar from "../components/SearchBar"
 import LibraryModel from '../model/LibraryModel'
+import EmptySearchMsg from '../components/EmptySearchMsg'
 
 export default function Library ( { setFlash } ) {
 
@@ -28,6 +30,16 @@ export default function Library ( { setFlash } ) {
     cursor : 'pointer',
   }
 
+  const searchBarBtnStyle = {
+    padding : '0.5rem 1rem',
+    marginRight : '1rem',
+    backgroundColor : '#1D571D',
+    color : '#fff',
+    border : '1px solid #571D1D',
+    borderRadius : '0.3rem',
+    cursor : 'pointer',
+  }
+
   const LIBRARYMODEL = new LibraryModel
 
   // Maybe Look into useMemo
@@ -43,37 +55,59 @@ export default function Library ( { setFlash } ) {
   }, [])
   
 
-  const [showAddBookForm, toggleShowAddBookForm] = useState(false)
-
+  const [userAction, setUserAction] = useState(false)
+  const showEmptySearchMsg = library.length === 0 ? true : false
 
 
 
   return(
-  <div className="slide-down">
+  <div>
 
     <div style={ libraryActionsStyle }>
 
+      <button
+        onClick={ () =>  setUserAction( userAction !== 'searchLibrary' ? 'searchLibrary' : false ) }
+        style={ searchBarBtnStyle }
+      >
+        { 
+        userAction !== 'searchLibrary' ? 'Search Library' : 'Close' 
+        }
+      </button>
+      
       <button 
-        onClick={ () => toggleShowAddBookForm(!showAddBookForm) } 
+        onClick={ () => setUserAction( userAction !== 'addBook' ? 'addBook' : false) } 
         style={ addBookBtnStyle }
       >
-        { !showAddBookForm ? 'Add Book' : 'Close'}
+        { userAction !== 'addBook' ? 'Add Book' : 'Close' }
       </button>
 
     </div>
 
     {
-    showAddBookForm && 
+    userAction == 'addBook' && 
       <AddBookForm 
         LIBRARYMODEL={ LIBRARYMODEL } 
         setLibrary={ setLibrary } 
-        toggleShowAddBookForm={ toggleShowAddBookForm } 
-        showAddBookForm={ showAddBookForm }
+        setUserAction={ setUserAction } 
         setFlash={ setFlash }
       />
     }
-  
+
+    {
+      userAction == 'searchLibrary' &&
+        <SearchBar 
+          LIBRARYMODEL={ LIBRARYMODEL }
+          setLibrary={ setLibrary }
+        />
+    }
+
+    {
+      showEmptySearchMsg && 
+        <EmptySearchMsg />
+    }
+
     <div style={ libraryStyle }>
+
       { 
       library.map((book, index) => 
         <Book 

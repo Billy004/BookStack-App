@@ -41,7 +41,7 @@ export default class LibraryModel {
   
 
   async getBook(isbn) {
-    const book = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=getBook&isbn=${isbn}`)
+    const book = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=getBook&query=${isbn}`)
 
     return book.json()
   }
@@ -51,7 +51,7 @@ export default class LibraryModel {
   async deleteBook(isbn) {
     try {
 
-      const deletedBook = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=deleteBook&isbn=${isbn}`) 
+      const deletedBook = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=deleteBook&query=${isbn}`) 
       
       if (deletedBook.status === 200) return true
 
@@ -60,4 +60,17 @@ export default class LibraryModel {
     }
   }
 
+
+
+  async searchLibrary(query) {
+    // console.log(query)
+
+    try {
+      const searchResults = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=searchLibrary&query=${query}`)
+
+      return searchResults.json()
+    } catch (e) {
+      console.log(e)
+    }
+  }
 }

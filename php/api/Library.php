@@ -75,8 +75,13 @@ class Library {
 
 
 
-  public function searchLibrary() {
+  public function searchLibrary($query) {
+    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE title LIKE :query OR author LIKE :query');
+    
+    $this->stmt->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
+    $this->stmt->execute();
 
+    return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }
 
@@ -85,14 +90,13 @@ class Library {
 
 $library = new Library;
 $action = !empty($_GET['action']) ? $_GET['action'] : false;
-$isbn = !empty($_GET['isbn']) ? $_GET['isbn'] : false;
+$query = !empty($_GET['query']) ? $_GET['query'] : false;
 
 
 
+if ($action == 'getBook' && !empty($query)) {
 
-if ($action == 'getBook' && !empty($isbn)) {
-
-  echo json_encode($library->getBook($isbn),JSON_PRETTY_PRINT);
+  echo json_encode($library->getBook($query),JSON_PRETTY_PRINT);
 
 
 
@@ -118,11 +122,21 @@ if ($action == 'getBook' && !empty($isbn)) {
 
 } elseif ($action == 'deleteBook') {
 
-  if (!empty($isbn) && $library->getBook($isbn)) {
-      $library->deleteBook($isbn);
+  if (!empty($query) && $library->getBook($query)) {
+      $library->deleteBook($query);
       echo $isbn;
   }
-  echo 'deleting book';
+
+
+
+
+} elseif ($action == 'searchLibrary') {
+
+  if (empty($query)){
+    echo json_encode($library->getLibrary(), JSON_PRETTY_PRINT);
+  } else {
+    echo json_encode( $library->searchLibrary($query), JSON_PRETTY_PRINT );
+  }
 
 
 
