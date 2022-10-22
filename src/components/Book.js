@@ -1,13 +1,17 @@
 
+import { useState } from 'react'
 import imageNotAvailable from '../img/image-not-available.svg'
 
 export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
   
   if(!bookData.cover) bookData.cover = imageNotAvailable
 
-  const { isbn, title, author, pages, cover } = bookData
-  const isRead = bookData.is_read
-  const dateAdded = bookData.date_added
+  const { isbn, title, author, cover } = bookData
+
+  const [isRead, setIsRead] = useState(Number(bookData.is_read) === 1 ? true : false)
+
+
+
 
   const bookStyle = {
     border : '1px solid #333',
@@ -61,6 +65,14 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
 
   }
 
+
+  async function handleToggleReadStatus(isbn) {
+
+    await LIBRARYMODEL.toggleReadStatus(isbn)
+    setIsRead(!isRead)
+
+  }
+
   return(
   <div style={ bookStyle } id={ isbn }>
 
@@ -75,11 +87,16 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
 
     <div style={ btnWrapperStyle }>
 
-      <button style={ btnStyle }>
-        R/U
+      <button 
+        style={ btnStyle }
+        onClick={ () => handleToggleReadStatus(isbn) }  
+        >
+        { isRead ? 'R' : 'U' }
       </button>
 
-      <button style={ btnStyle }>
+      <button 
+        style={ btnStyle }
+      >
         MI
       </button>
 

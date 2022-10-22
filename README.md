@@ -24,3 +24,6 @@ More Info coming soon
 - refactor model/api
   - LibraryModel.js -> make Constants for fetch URLs
   - Put reusable php code in Database class and extend
+
+#### Bugs
+- First book in library wont toggle Read/Unread status properly

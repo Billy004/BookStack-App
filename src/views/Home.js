@@ -7,7 +7,10 @@ export default function Home () {
   return(
   <div style={ homeStyle }>
   
-  home
+  <h1>Welcome to BookStack!</h1>
+  <h2>Keep your Books organized</h2>
+
+  <h3>Log in:</h3>
   
   </div>
 

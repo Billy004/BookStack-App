@@ -1,9 +1,5 @@
 export default class LibraryModel {
 
-  constructor() {
-
-  }
-
   async getLibrary() {
 
     try {
@@ -33,7 +29,7 @@ export default class LibraryModel {
       body : JSON.stringify(data)
     }
 
-    const googleResponse = await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=addBook', requestOptions)
+    await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=addBook', requestOptions)
 
   }
 
@@ -63,12 +59,24 @@ export default class LibraryModel {
 
 
   async searchLibrary(query) {
-    // console.log(query)
 
     try {
       const searchResults = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=searchLibrary&query=${query}`)
 
       return searchResults.json()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+
+
+
+  async toggleReadStatus(isbn) {
+
+    try {
+      await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=toggleReadStatus&query=${isbn}`)
+
     } catch (e) {
       console.log(e)
     }

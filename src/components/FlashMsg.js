@@ -45,7 +45,7 @@ export default function FlashMsg ({ flash, setFlash }) {
     }, 10000)
 
     return () => clearTimeout(flashTimer)
-  }, [])
+  }, [setFlash])
 
 
   return(

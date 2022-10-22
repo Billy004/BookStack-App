@@ -83,6 +83,23 @@ class Library {
 
     return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+
+
+
+  public function toggleReadStatus($isbn) {
+    $currentBook = $this->getBook($isbn);
+    $currentReadStatus = $currentBook->is_read;
+
+    $currentReadStatus = [
+      'read' => $currentReadStatus == 1 ? '' : 1,
+      'isbn' => $isbn
+    ];
+    
+
+    $this->stmt = $this->dbh->prepare("UPDATE library SET is_read = :read WHERE isbn = :isbn");
+    $this->stmt->execute($currentReadStatus);
+  }
 }
 
 
@@ -137,6 +154,13 @@ if ($action == 'getBook' && !empty($query)) {
   } else {
     echo json_encode( $library->searchLibrary($query), JSON_PRETTY_PRINT );
   }
+
+
+
+
+} elseif ($action == 'toggleReadStatus') {
+
+  $library->toggleReadStatus($query);
 
 
 

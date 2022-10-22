@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Book from "../components/Book";
 import AddBookForm from "../components/AddBookForm";
 import SearchBar from "../components/SearchBar"
@@ -10,7 +10,7 @@ export default function Library ( { setFlash } ) {
   const libraryStyle = {
     padding : '1rem',
     display : 'grid',
-    gridTemplateColumns : 'repeat(auto-fit, minmax(100px, 1fr))',
+    gridTemplateColumns : 'repeat(auto-fit, 140px)',
     gap : '1rem',
   }
 
@@ -40,7 +40,7 @@ export default function Library ( { setFlash } ) {
     cursor : 'pointer',
   }
 
-  const LIBRARYMODEL = new LibraryModel
+  const LIBRARYMODEL = useMemo( () => new LibraryModel(), [] ) 
 
   // Maybe Look into useMemo
   const [library, setLibrary] = useState([{}]);
@@ -52,7 +52,7 @@ export default function Library ( { setFlash } ) {
     }
   
     initLibrary()
-  }, [])
+  }, [LIBRARYMODEL])
   
 
   const [userAction, setUserAction] = useState(false)
@@ -84,7 +84,7 @@ export default function Library ( { setFlash } ) {
     </div>
 
     {
-    userAction == 'addBook' && 
+    userAction === 'addBook' && 
       <AddBookForm 
         LIBRARYMODEL={ LIBRARYMODEL } 
         setLibrary={ setLibrary } 
@@ -94,7 +94,7 @@ export default function Library ( { setFlash } ) {
     }
 
     {
-      userAction == 'searchLibrary' &&
+      userAction === 'searchLibrary' &&
         <SearchBar 
           LIBRARYMODEL={ LIBRARYMODEL }
           setLibrary={ setLibrary }
