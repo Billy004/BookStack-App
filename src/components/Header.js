@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 
-export default function Header() {
+export default function Header({ user }) {
+
+  const userStyle = {
+    textAlign : 'right',
+  }
 
   const navStyle = {
     display : 'flex',
@@ -28,21 +32,29 @@ export default function Header() {
   }
 
   return(
-  <nav style={ navStyle }>
-  
-    <div style={ logoStyle }>
-      BookStack
-    </div>
+    <>
+      <div style={ userStyle }>
+        {
+        user &&
+          `Logged in as: ${user.email}`
+        }
+      </div>
+    
+      <nav style={ navStyle }>
+    
+        <div style={ logoStyle }>
+          BookStack
+        </div>
 
-    <ul style={ ulStyle }>
-      <li><Link to="/" style={ linkStyle }>Home</Link></li>
-      <li><Link to="/library" style={ linkStyle }>Library</Link></li>
-      <li><Link to="/about" style={ linkStyle }>About</Link></li>
-      <li><Link to="/users" style={ linkStyle }>Users</Link></li>
-    </ul>
+        <ul style={ ulStyle }>
+          <li><Link to="/" style={ linkStyle }>Home</Link></li>
+          <li><Link to="/library" style={ linkStyle }>Library</Link></li>
+          <li><Link to="/about" style={ linkStyle }>About</Link></li>
+          <li><Link to="/users" style={ linkStyle }>Users</Link></li>
+        </ul>
 
-  
-  </nav>
+      </nav>
+    </>
 
   )
 

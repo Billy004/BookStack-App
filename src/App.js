@@ -19,6 +19,10 @@ import MoreBookInfo from "./views/MoreBookInfo";
 
 function App() {
  
+  // Determine User Logged in or Default to log out
+  // obj { email, id } or false
+  const [user, setUser] = useState(false)
+  
   // Determines flash message
   // obj { message : 'Message to user', type : 'success or fail' } 
   const [flash, setFlash] = useState(false); // False or Obj
@@ -29,7 +33,7 @@ function App() {
 
     <div className="App container">
 
-      <Header />
+      <Header user={ user } />
 
       {
         flash && <FlashMsg flash={flash} setFlash={setFlash} />
@@ -37,9 +41,20 @@ function App() {
 
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          <Home 
+            user={ user } 
+            setUser={ setUser } 
+            setFlash={ setFlash } 
+          />
+        } />
 
-        <Route path="/library" element={<Library flash={ flash } setFlash={ setFlash } />} />
+        <Route path="/library" element={
+          <Library 
+            flash={ flash } 
+            setFlash={ setFlash } 
+          />} 
+        />
 
         <Route path="/library/:isbn" element={<MoreBookInfo />} />
 

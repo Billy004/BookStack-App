@@ -10,12 +10,8 @@ export default function ChangeSettings ({sortMethod, setSortMethod, filterMethod
 
   function handleMethodChange(method, param) {
     switch (method) {
-      case 'sort':
-        setSortMethod(param)
-        break;
-      case 'filter':
-        setFilterMethod(param)
-        break;
+      case 'sort': setSortMethod(param); break
+      case 'filter': setFilterMethod(param); break
       default:
     }
   }
