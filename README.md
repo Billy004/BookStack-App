@@ -18,8 +18,6 @@ More Info coming soon
   - log in 
   - log out
 - user settings (sort, filter)
-- toggle book read/unread
-- book more info modal
 - use res.ok for fetch statements
 - refactor model/api
   - LibraryModel.js -> make Constants for fetch URLs

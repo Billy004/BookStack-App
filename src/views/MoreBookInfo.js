@@ -31,6 +31,7 @@ export default function MoreBookInfo () {
   }
   
   const contentStyle = {
+    minWidth : '300px',
     width : '60%',
   }
 
@@ -51,8 +52,6 @@ export default function MoreBookInfo () {
     categories, 
     description,
     pageCount,
-    publishedDate,
-    publisher,
     ratingsCount,
     subtitle,
     title, 
@@ -76,13 +75,15 @@ export default function MoreBookInfo () {
     </div>
 
     <div style={ coverImageWrapperStyle }>
-      <img src={ cover } style={ coverImageStyle }/>
+      <img src={ cover } style={ coverImageStyle } alt="Book Cover"/>
     </div>
 
     <div style={ contentStyle }>
 
       <h2>
         <span>{title}</span>
+
+        { subtitle && ': ' }
         <span>{subtitle}</span>
       </h2>
 

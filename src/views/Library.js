@@ -4,6 +4,7 @@ import AddBookForm from "../components/AddBookForm";
 import SearchBar from "../components/SearchBar"
 import LibraryModel from '../model/LibraryModel'
 import EmptySearchMsg from '../components/EmptySearchMsg'
+import ChangeSettings from "../components/ChangeSettings";
 
 export default function Library ( { setFlash } ) {
 
@@ -17,8 +18,18 @@ export default function Library ( { setFlash } ) {
   const libraryActionsStyle = {
     display : 'flex',
     justifyContent : 'flex-end',
+    gap : '1rem',
     width : '100%',
     padding : '1rem',
+  }
+
+  const settingsBtnStyle = {
+    padding : '0.5rem 1rem',
+    backgroundColor : '#571D57',
+    color : '#fff',
+    border : '1px solid #571D1D',
+    borderRadius : '0.3rem',
+    cursor : 'pointer',
   }
 
   const addBookBtnStyle = {
@@ -32,13 +43,15 @@ export default function Library ( { setFlash } ) {
 
   const searchBarBtnStyle = {
     padding : '0.5rem 1rem',
-    marginRight : '1rem',
     backgroundColor : '#1D571D',
     color : '#fff',
     border : '1px solid #571D1D',
     borderRadius : '0.3rem',
     cursor : 'pointer',
   }
+  
+  const [sortMethod, setSortMethod] = useState()
+  const [filterMethod, setFilterMethod] = useState()
 
   const LIBRARYMODEL = useMemo( () => new LibraryModel(), [] ) 
 
@@ -64,6 +77,13 @@ export default function Library ( { setFlash } ) {
   <div>
 
     <div style={ libraryActionsStyle }>
+
+      <button
+        onClick={ () => setUserAction( userAction !== 'changeSettings' ? 'changeSettings' : false ) }
+        style={ settingsBtnStyle }
+      >
+        Settings
+      </button>
 
       <button
         onClick={ () =>  setUserAction( userAction !== 'searchLibrary' ? 'searchLibrary' : false ) }
@@ -99,6 +119,16 @@ export default function Library ( { setFlash } ) {
           LIBRARYMODEL={ LIBRARYMODEL }
           setLibrary={ setLibrary }
         />
+    }
+
+    {
+      userAction === 'changeSettings' &&
+      <ChangeSettings 
+        sortMethod={ sortMethod }
+        setSortMethod={ setSortMethod }
+        filterMethod={ filterMethod }
+        setFilterMethod={ setFilterMethod }
+      />
     }
 
     {
