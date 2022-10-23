@@ -60,8 +60,6 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, userAction, se
       userId : 1,
     }
 
-    console.log(newBook.date)
-
     // Add Book to DB. If 'duplicate' is returned let the user know the book was already added
     if (await LIBRARYMODEL.addBook(newBook) === 'duplicate') {
       setFlash({

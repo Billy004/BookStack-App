@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import imageNotAvailable from '../img/image-not-available.svg'
 
 export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
@@ -9,8 +10,6 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
   const { isbn, title, author, cover } = bookData
 
   const [isRead, setIsRead] = useState(Number(bookData.is_read) === 1 ? true : false)
-
-
 
 
   const bookStyle = {
@@ -42,7 +41,6 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
     outline : '0',
     cursor : 'pointer',
   }
-
 
 
   async function handleDelete(isbn, title) {
@@ -94,11 +92,9 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
         { isRead ? 'R' : 'U' }
       </button>
 
-      <button 
-        style={ btnStyle }
-      >
-        MI
-      </button>
+      <Link to={ `/library/${isbn}` }>
+        <button style={ btnStyle }>MI</button>
+      </Link>
 
       <button onClick={ () => handleDelete(isbn, title) } style={ btnStyle }>
         DEL

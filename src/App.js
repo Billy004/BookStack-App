@@ -14,6 +14,7 @@ import About from "./views/About";
 import Header from "./components/Header";
 import FlashMsg from "./components/FlashMsg";
 import Footer from "./components/Footer";
+import MoreBookInfo from "./views/MoreBookInfo";
 
 
 function App() {
@@ -40,9 +41,12 @@ function App() {
 
         <Route path="/library" element={<Library flash={ flash } setFlash={ setFlash } />} />
 
+        <Route path="/library/:isbn" element={<MoreBookInfo />} />
+
         <Route path="Users" element={<Users />} />
 
         <Route path="About" element={<About />} />
+
       </Routes>
 
       <Footer />
