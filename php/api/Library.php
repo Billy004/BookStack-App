@@ -35,18 +35,30 @@ class Library {
 
 
 
-  public function getLibrary() {
-    $this->stmt = $this->dbh->query('SELECT * FROM library');
+  public function getLibrary($user_id) {
+    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE user_id = :id');
+    $this->stmt->bindValue(':id', $user_id, PDO::PARAM_STR);
+    $this->stmt->execute();
+
     return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+
+  public function getBookByIsbn($isbn) {
+
+    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE isbn = :isbn');
+    $this->stmt->execute(['isbn' => $isbn]);
+
+    return $this->stmt->fetch(PDO::FETCH_OBJ);
   }
 
 
 
 
-  public function getBook($isbn) {
+  public function getBookById($id) {
 
-    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE isbn = :isbn');
-    $this->stmt->execute(['isbn' => $isbn]);
+    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE book_id = :id');
+    $this->stmt->execute(['id' => $id]);
 
     return $this->stmt->fetch(PDO::FETCH_OBJ);
   }
@@ -66,10 +78,11 @@ class Library {
 
 
 
-  public function deleteBook($isbn) {
-    $bookToDelete = ['isbn' => $isbn];
-    $this->stmt = $this->dbh->prepare("DELETE FROM library WHERE isbn = :isbn");
+  public function deleteBook($id) {
+    $bookToDelete = ['id' => $id];
+    $this->stmt = $this->dbh->prepare("DELETE FROM library WHERE book_id = :id");
     $this->stmt->execute($bookToDelete);
+    
   }
 
 
@@ -87,18 +100,12 @@ class Library {
 
 
 
-  public function toggleReadStatus($isbn) {
-    $currentBook = $this->getBook($isbn);
-    $currentReadStatus = $currentBook->is_read;
-
-    $currentReadStatus = [
-      'read' => $currentReadStatus == 1 ? '' : 1,
-      'isbn' => $isbn
-    ];
+  public function toggleReadStatus($id) {
+    $currentBook = $this->getBookById($id);
+    $currentReadStatus = ($currentBook->is_read == 1) ? '' : 1;
     
-
-    $this->stmt = $this->dbh->prepare("UPDATE library SET is_read = :read WHERE isbn = :isbn");
-    $this->stmt->execute($currentReadStatus);
+    $this->stmt = $this->dbh->prepare("UPDATE library SET is_read = :read WHERE book_id = :id");
+    $this->stmt->execute(['read' => $currentReadStatus, 'id' => $id]);
   }
 }
 
@@ -113,14 +120,14 @@ $query = !empty($_GET['query']) ? $_GET['query'] : false;
 
 if ($action == 'getBook' && !empty($query)) {
 
-  echo json_encode($library->getBook($query),JSON_PRETTY_PRINT);
+  echo json_encode($library->getBookByIsbn($query),JSON_PRETTY_PRINT);
 
 
 
 
-} elseif ($action == 'getLibrary' ) {
+} elseif ($action == 'getLibrary' && !empty($query)) {
 
-  echo json_encode($library->getLibrary(), JSON_PRETTY_PRINT);
+  echo json_encode($library->getLibrary($query), JSON_PRETTY_PRINT);
 
 
 
@@ -139,10 +146,9 @@ if ($action == 'getBook' && !empty($query)) {
 
 } elseif ($action == 'deleteBook') {
 
-  if (!empty($query) && $library->getBook($query)) {
+  if (!empty($query) && $library->getBookById($query)) {
       $library->deleteBook($query);
-      echo $isbn;
-  }
+   }
 
 
 
@@ -160,7 +166,7 @@ if ($action == 'getBook' && !empty($query)) {
 
 } elseif ($action == 'toggleReadStatus') {
 
-  $library->toggleReadStatus($query);
+  print_r($library->toggleReadStatus($query));
 
 
 

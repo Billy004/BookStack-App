@@ -39,7 +39,6 @@ export default function Header({ user, setUser }) {
   }
 
   const currentPage = useLocation().pathname
-  console.log(currentPage)
 
   return(
     <>
@@ -47,7 +46,7 @@ export default function Header({ user, setUser }) {
         {
         user &&
         <>
-          Logged in as: { user.email }
+          Logged in as: { user.email } ({user.id})
           <button onClick={ () => setUser(false) } className="ml1">Log Out</button>
         </>
         }

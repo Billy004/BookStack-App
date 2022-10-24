@@ -22,9 +22,6 @@ export default function Home({user, setUser, setFlash}) {
     const response = await USERMODEL.login(email, pass)
     let isLoggedIn = await response.text()
 
-    console.log(isLoggedIn)
-
-    
     if(isLoggedIn !== "0") {
 
       isLoggedIn = JSON.parse(isLoggedIn)

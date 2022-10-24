@@ -28,7 +28,7 @@ function App() {
   // obj { message : 'Message to user', type : 'success or fail' } 
   const [flash, setFlash] = useState(false); // False or Obj
 
-
+ 
   return (
     <Router>
 
@@ -52,7 +52,7 @@ function App() {
 
         <Route path="/library" element={
           user !== false 
-          ? <Library flash={ flash } setFlash={ setFlash } />
+          ? <Library setFlash={ setFlash } user={ user } />
           : <MustLogin />
         } 
         />

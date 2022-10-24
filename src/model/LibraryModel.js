@@ -1,12 +1,12 @@
 export default class LibraryModel {
 
-  async getLibrary() {
-
+  async getLibrary(userId) {
     try {
 
-      const data = await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/api/library.php?action=getLibrary')
+      const data = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/library.php?action=getLibrary&query=${userId}`)
 
       let books = await data.json()
+      
       return books
       // return data
     } catch(err) {
@@ -18,11 +18,7 @@ export default class LibraryModel {
 
 
   async addBook(data) {
-
-    // TODO Check if book is already added
-    let book = await this.getBook(data.isbn)
-    if(book) return 'duplicate'
-
+    // Called by handleAddBook im <AddBookForm />. userHasBook already checked.
     const requestOptions = {
       method : 'POST',
       headers : { 'Content-Type': 'application/json' },
@@ -44,10 +40,9 @@ export default class LibraryModel {
 
 
 
-  async deleteBook(isbn) {
+  async deleteBook(id) {
     try {
-
-      const deletedBook = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=deleteBook&query=${isbn}`) 
+      const deletedBook = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=deleteBook&query=${id}`) 
       
       if (deletedBook.status === 200) return true
 
@@ -72,10 +67,9 @@ export default class LibraryModel {
 
 
 
-  async toggleReadStatus(isbn) {
-
+  async toggleReadStatus(id) {
     try {
-      await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=toggleReadStatus&query=${isbn}`)
+      await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=toggleReadStatus&query=${id}`)
 
     } catch (e) {
       console.log(e)

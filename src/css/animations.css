@@ -1,5 +1,5 @@
 
-.fade-out { animation: fade-out 10s linear both; }
+.fade-out { animation: fade-out 6s linear both; }
 
 @keyframes fade-out {
   from { opacity : 1; }

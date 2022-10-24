@@ -11,7 +11,6 @@ More Info coming soon
 #### TODO
 - UI/UX
   - make a kickass css layout
-  - Active Nav Link
   - light/dark mode
 - users
   - sign up
@@ -24,4 +23,3 @@ More Info coming soon
   - Put reusable php code in Database class and extend
 
 #### Bugs
-- First book in library wont toggle Read/Unread status properly

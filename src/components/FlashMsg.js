@@ -42,7 +42,7 @@ export default function FlashMsg ({ flash, setFlash }) {
   useEffect( () => {
     const flashTimer = setTimeout( () => {
       setFlash(false)
-    }, 10000)
+    }, 6000)
 
     return () => clearTimeout(flashTimer)
   }, [setFlash])

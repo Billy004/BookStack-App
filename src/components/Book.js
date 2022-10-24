@@ -3,12 +3,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import imageNotAvailable from '../img/image-not-available.svg'
 
-export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
+export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrary}) {
   
   if(!bookData.cover) bookData.cover = imageNotAvailable
 
   const { isbn, title, author, cover } = bookData
-
+  const bookId = bookData.book_id
+  
   const [isRead, setIsRead] = useState(Number(bookData.is_read) === 1 ? true : false)
 
 
@@ -43,8 +44,8 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
   }
 
 
-  async function handleDelete(isbn, title) {
-    const deletedBook = await LIBRARYMODEL.deleteBook(isbn)
+  async function handleDelete(title, id) {
+    const deletedBook = await LIBRARYMODEL.deleteBook(id)
     if (deletedBook) {
       setFlash({
         message : `${title} was deleted successfully`,
@@ -58,15 +59,15 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
     }
 
     // Update UI
-    const updatedLibrary = await LIBRARYMODEL.getLibrary()
+    const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id)
     setLibrary(updatedLibrary)
 
   }
 
 
-  async function handleToggleReadStatus(isbn) {
+  async function handleToggleReadStatus(id) {
 
-    await LIBRARYMODEL.toggleReadStatus(isbn)
+    await LIBRARYMODEL.toggleReadStatus(id)
     setIsRead(!isRead)
 
   }
@@ -87,7 +88,7 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
 
       <button 
         style={ btnStyle }
-        onClick={ () => handleToggleReadStatus(isbn) }  
+        onClick={ () => handleToggleReadStatus(bookId) }  
         >
         { isRead ? 'R' : 'U' }
       </button>
@@ -96,7 +97,7 @@ export default function Book ({bookData, LIBRARYMODEL, setFlash, setLibrary}) {
         <button style={ btnStyle }>MI</button>
       </Link>
 
-      <button onClick={ () => handleDelete(isbn, title) } style={ btnStyle }>
+      <button onClick={ () => handleDelete(title, bookId) } style={ btnStyle }>
         DEL
       </button>
       

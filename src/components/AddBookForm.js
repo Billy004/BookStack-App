@@ -1,7 +1,7 @@
 
 import { getGoogleBookInfo } from "../utils/google"
 
-export default function AddBookForm ( { LIBRARYMODEL, setLibrary, userAction, setUserAction, setFlash } ) {
+export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary, setUserAction, setFlash } ) {
 
   const addBookStyle = {
     marginInline : '1rem',
@@ -23,6 +23,7 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, userAction, se
     cursor : 'pointer',
   }
 
+
   async function handleSubmit(e) {
 
     e.preventDefault()
@@ -37,6 +38,21 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, userAction, se
       })
       return
     }
+  
+    const userHasBook = library.find( (book) => {
+      return book.isbn === isbn
+    } )
+
+    if(userHasBook) {
+      setFlash({
+        message : `This book is already in your Library.`,
+        type : 'fail',
+        link : `#${isbn}`,
+        linkText : 'View Book >'
+      })
+      return
+    }
+  
 
     const googleResponse = await getGoogleBookInfo(isbn)
 
@@ -57,7 +73,7 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, userAction, se
       title : googleResponse.title,
       author : googleResponse.authors[0],
       pages : googleResponse.pageCount,
-      userId : 1,
+      userId : user.id,
     }
 
     // Add Book to DB. If 'duplicate' is returned let the user know the book was already added
@@ -72,7 +88,7 @@ export default function AddBookForm ( { LIBRARYMODEL, setLibrary, userAction, se
     }
 
     // Update Library in UI
-    const updatedLibrary = await LIBRARYMODEL.getLibrary()
+    const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id)
     setLibrary(updatedLibrary)
 
     // Close Add Book Form

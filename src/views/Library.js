@@ -6,7 +6,7 @@ import LibraryModel from '../model/LibraryModel'
 import EmptySearchMsg from '../components/EmptySearchMsg'
 import ChangeSettings from "../components/ChangeSettings";
 
-export default function Library ( { setFlash } ) {
+export default function Library ( { setFlash, user } ) {
 
   const libraryStyle = {
     padding : '1rem',
@@ -56,22 +56,22 @@ export default function Library ( { setFlash } ) {
   const LIBRARYMODEL = useMemo( () => new LibraryModel(), [] ) 
 
   // Maybe Look into useMemo
-  const [library, setLibrary] = useState([{}]);
+  const [library, setLibrary] = useState([]);
 
   useEffect( () => {
     async function initLibrary() {
-      const lib =  await LIBRARYMODEL.getLibrary();
+      const lib =  await LIBRARYMODEL.getLibrary(user.id);
       setLibrary(lib)
     }
   
     initLibrary()
-  }, [LIBRARYMODEL])
+  }, [LIBRARYMODEL, user])
   
 
   const [userAction, setUserAction] = useState(false)
   const showEmptySearchMsg = library.length === 0 ? true : false
 
-
+  console.log(library)
 
   return(
   <div>
@@ -107,6 +107,8 @@ export default function Library ( { setFlash } ) {
     userAction === 'addBook' && 
       <AddBookForm 
         LIBRARYMODEL={ LIBRARYMODEL } 
+        user={ user }
+        library={ library }
         setLibrary={ setLibrary } 
         setUserAction={ setUserAction } 
         setFlash={ setFlash }
@@ -142,6 +144,7 @@ export default function Library ( { setFlash } ) {
       library.map((book, index) => 
         <Book 
           LIBRARYMODEL={ LIBRARYMODEL }
+          user={ user }
           setLibrary={ setLibrary }
           setFlash={ setFlash }
           bookData={ book }
