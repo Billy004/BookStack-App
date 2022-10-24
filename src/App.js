@@ -10,6 +10,7 @@ import Home from "./views/Home";
 import Library from "./views/Library";
 import Users from "./views/Users";
 import About from "./views/About";
+import MustLogin from "./views/MustLogin";
 
 import Header from "./components/Header";
 import FlashMsg from "./components/FlashMsg";
@@ -33,7 +34,7 @@ function App() {
 
     <div className="App container">
 
-      <Header user={ user } />
+      <Header user={ user } setUser={ setUser } />
 
       {
         flash && <FlashMsg flash={flash} setFlash={setFlash} />
@@ -50,10 +51,10 @@ function App() {
         } />
 
         <Route path="/library" element={
-          <Library 
-            flash={ flash } 
-            setFlash={ setFlash } 
-          />} 
+          user !== false 
+          ? <Library flash={ flash } setFlash={ setFlash } />
+          : <MustLogin />
+        } 
         />
 
         <Route path="/library/:isbn" element={<MoreBookInfo />} />

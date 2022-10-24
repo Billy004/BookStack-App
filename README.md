@@ -15,7 +15,7 @@ More Info coming soon
   - light/dark mode
 - users
   - sign up
-  - log in 
+  - add sessions with log in (cant do on localhost due to different ports)
   - log out
 - user settings (sort, filter)
 - use res.ok for fetch statements

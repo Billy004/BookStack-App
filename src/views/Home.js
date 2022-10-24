@@ -1,4 +1,5 @@
 import UserModel from "../model/UserModel";
+import { Link } from "react-router-dom";
 
 export default function Home({user, setUser, setFlash}) {
 
@@ -45,23 +46,40 @@ export default function Home({user, setUser, setFlash}) {
   <h1>Welcome to BookStack!</h1>
   <h2>Keep your Books organized</h2>
 
-  <h3>Log in:</h3>
+  {
+    user ?
+    <>
+    <p>
+      You are logged in as {user.email}.
+    </p>
+    <p>
+      <Link to="/library">View your library >></Link>
+    </p>
+    </>
 
-  <form onSubmit={ handleLogin } >
-    
-    <label style={ labelStyle }>
-      Email<br />
-      <input type="text" name="name" />
-    </label>
-    
-    <label style={ labelStyle }>
-      Password<br />
-      <input type="password" name="name" />
-    </label>
+    :
+    <>
+      <h3>Log in:</h3>
 
-    <input type="submit" value="Log In" />
+      <form onSubmit={ handleLogin } >
+        
+        <label style={ labelStyle }>
+          Email<br />
+          <input type="text" name="name" />
+        </label>
+        
+        <label style={ labelStyle }>
+          Password<br />
+          <input type="password" name="name" />
+        </label>
 
-  </form>
+        <input type="submit" value="Log In" />
+
+      </form>
+    </>
+  }
+
+  
   
   </div>
 

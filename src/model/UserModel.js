@@ -19,4 +19,8 @@ export default class UserModel {
   }
 
 
+  logout(userId) {
+    // Placeholder
+  }
+
 }
