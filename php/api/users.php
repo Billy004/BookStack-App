@@ -38,10 +38,6 @@ class Users {
 
 
   public function login($loginData) {
-      // $this->dbh->query("SELECT * FROM users WHERE email = :email");
-      // $this->dbh->bind(':email', $email);
-
-      // $user = $this->dbh->single();
 
       $email = $loginData["email"];
 
@@ -63,6 +59,32 @@ class Users {
 
   }
 
+
+
+
+  public function signUp($loginData) {
+
+   
+    $this->stmt = $this->dbh->prepare('INSERT INTO users (email, password) VALUES (:email, :password)');
+
+    $this->stmt->execute($loginData);
+
+
+    $user = $this->stmt->fetch(PDO::FETCH_OBJ);
+    return $user;    
+
+
+  }
+
+
+
+  public function getUserByEmail($email) {
+    $this->stmt = $this->dbh->prepare('SELECT * FROM users WHERE email = :email');
+    $this->stmt->execute(['email' => $email]);
+
+    return $this->stmt->fetch(PDO::FETCH_OBJ);
+  }
+
 }
 
 
@@ -81,7 +103,7 @@ if ($action == 'login') {
   $login_attempt = $users->login($user);
 
   if(!empty($login_attempt)) {
-    echo json_encode($login_attempt,JSON_PRETTY_PRINT);
+    echo json_encode($login_attempt, JSON_PRETTY_PRINT);
     $_SESSION['user_id'] = $login_attempt->id;
   } else {
     echo '0';
@@ -96,8 +118,22 @@ if ($action == 'login') {
   
   
   
-} elseif ($action == 'signup') {
-  echo 'Sign Up';
+} elseif ($action == 'signUp') {
+  
+  $json = file_get_contents("php://input");
+  $user = json_decode($json, true);
+
+
+  if( empty($users->getUserByEmail($user['email'])) ) {
+    $sign_up_attempt = $users->signUp($user);
+
+    $newUser = $users->getUserByEmail($user['email']);
+    echo json_encode($newUser->email, JSON_PRETTY_PRINT);
+  } else {
+    echo 'duplicate';
+  }
+
+
   
   
 } else {

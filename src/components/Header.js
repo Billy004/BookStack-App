@@ -62,7 +62,10 @@ export default function Header({ user, setUser }) {
           <li><Link to="/" style={ currentPage === '/' ? activeLinkStyle : linkStyle }>Home</Link></li>
           <li><Link to="/library" style={ currentPage.includes('/library') ? activeLinkStyle : linkStyle }>Library</Link></li>
           <li><Link to="/about" style={ currentPage === '/about' ? activeLinkStyle : linkStyle }>About</Link></li>
-          <li><Link to="/users" style={ currentPage === '/users' ? activeLinkStyle : linkStyle }>Users</Link></li>
+          {
+          !user &&
+            <li><Link to="/sign-up" style={ currentPage === '/sign-up' ? activeLinkStyle : linkStyle }>Sign Up</Link></li>
+          }
         </ul>
 
       </nav>

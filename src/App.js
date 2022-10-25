@@ -8,7 +8,6 @@ import './css/main.css'
 // Views
 import Home from "./views/Home";
 import Library from "./views/Library";
-import Users from "./views/Users";
 import About from "./views/About";
 import MustLogin from "./views/MustLogin";
 
@@ -16,6 +15,7 @@ import Header from "./components/Header";
 import FlashMsg from "./components/FlashMsg";
 import Footer from "./components/Footer";
 import MoreBookInfo from "./views/MoreBookInfo";
+import SignUp from "./views/SignUp";
 
 
 function App() {
@@ -59,9 +59,9 @@ function App() {
 
         <Route path="/library/:isbn" element={<MoreBookInfo />} />
 
-        <Route path="Users" element={<Users />} />
+        <Route path="/about" element={<About />} />
 
-        <Route path="About" element={<About />} />
+        <Route path="/sign-up" element={<SignUp setFlash={ setFlash } />} />
 
       </Routes>
 

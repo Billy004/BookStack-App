@@ -71,7 +71,6 @@ export default function Library ( { setFlash, user } ) {
   const [userAction, setUserAction] = useState(false)
   const showEmptySearchMsg = library.length === 0 ? true : false
 
-  console.log(library)
 
   return(
   <div>

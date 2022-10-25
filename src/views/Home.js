@@ -50,7 +50,7 @@ export default function Home({user, setUser, setFlash}) {
       You are logged in as {user.email}.
     </p>
     <p>
-      <Link to="/library">View your library >></Link>
+      <Link to="/library">View your library</Link>
     </p>
     </>
 
@@ -67,7 +67,7 @@ export default function Home({user, setUser, setFlash}) {
         
         <label style={ labelStyle }>
           Password<br />
-          <input type="password" name="name" />
+          <input type="password" name="password" />
         </label>
 
         <input type="submit" value="Log In" />

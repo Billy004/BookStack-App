@@ -1,9 +1,11 @@
 export default class LibraryModel {
 
+  URLROOT = 'http://localhost:81/projects/BookStack-App/bookstack-app/php/api/library.php'
+
   async getLibrary(userId) {
     try {
 
-      const data = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/library.php?action=getLibrary&query=${userId}`)
+      const data = await fetch(`${this.URLROOT}?action=getLibrary&query=${userId}`)
 
       let books = await data.json()
       
@@ -25,7 +27,7 @@ export default class LibraryModel {
       body : JSON.stringify(data)
     }
 
-    await fetch('http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=addBook', requestOptions)
+    await fetch(`${this.URLROOT}?action=addBook`, requestOptions)
 
   }
 
@@ -33,7 +35,7 @@ export default class LibraryModel {
   
 
   async getBook(isbn) {
-    const book = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=getBook&query=${isbn}`)
+    const book = await fetch(`${this.URLROOT}?action=getBook&query=${isbn}`)
 
     return book.json()
   }
@@ -42,7 +44,7 @@ export default class LibraryModel {
 
   async deleteBook(id) {
     try {
-      const deletedBook = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=deleteBook&query=${id}`) 
+      const deletedBook = await fetch(`${this.URLROOT}?action=deleteBook&query=${id}`) 
       
       if (deletedBook.status === 200) return true
 
@@ -56,7 +58,7 @@ export default class LibraryModel {
   async searchLibrary(query) {
 
     try {
-      const searchResults = await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=searchLibrary&query=${query}`)
+      const searchResults = await fetch(`${this.URLROOT}?action=searchLibrary&query=${query}`)
 
       return searchResults.json()
     } catch (e) {
@@ -69,7 +71,7 @@ export default class LibraryModel {
 
   async toggleReadStatus(id) {
     try {
-      await fetch(`http://localhost:81/projects/BookStack-App/bookstack-app/php/api/Library.php?action=toggleReadStatus&query=${id}`)
+      await fetch(`${this.URLROOT}?action=toggleReadStatus&query=${id}`)
 
     } catch (e) {
       console.log(e)

@@ -13,13 +13,8 @@ More Info coming soon
   - make a kickass css layout
   - light/dark mode
 - users
-  - sign up
-  - add sessions with log in (cant do on localhost due to different ports)
-  - log out
+  - add sessions with log in/out (cant do on localhost due to different ports)
 - user settings (sort, filter)
 - use res.ok for fetch statements
-- refactor model/api
-  - LibraryModel.js -> make Constants for fetch URLs
-  - Put reusable php code in Database class and extend
 
 #### Bugs
