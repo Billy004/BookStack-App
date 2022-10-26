@@ -1,12 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Book from "../components/Book";
 import AddBookForm from "../components/AddBookForm";
 import SearchBar from "../components/SearchBar"
-import LibraryModel from '../model/LibraryModel'
 import EmptySearchMsg from '../components/EmptySearchMsg'
 import ChangeSettings from "../components/ChangeSettings";
 
-export default function Library ( { setFlash, user } ) {
+export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) {
 
   const libraryStyle = {
     padding : '1rem',
@@ -49,13 +48,28 @@ export default function Library ( { setFlash, user } ) {
     borderRadius : '0.3rem',
     cursor : 'pointer',
   }
+
+
+
+
+
   
   const [sortMethod, setSortMethod] = useState()
   const [filterMethod, setFilterMethod] = useState()
+  
 
-  const LIBRARYMODEL = useMemo( () => new LibraryModel(), [] ) 
+  useEffect( () => {
+    async function getUserSettings() {
+      const userSettings = await USERMODEL.getUserSettings(user.id)
 
-  // Maybe Look into useMemo
+      setSortMethod(userSettings.sort_method)
+      setFilterMethod(userSettings.filter_method)
+    }
+    getUserSettings()
+  }, [USERMODEL, user.id])
+
+
+
   const [library, setLibrary] = useState([]);
 
   useEffect( () => {

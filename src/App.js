@@ -1,6 +1,9 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import LibraryModel from './model/LibraryModel'
+import UserModel from './model/UserModel'
 
 import './css/main.css'
 
@@ -28,6 +31,9 @@ function App() {
   // obj { message : 'Message to user', type : 'success or fail' } 
   const [flash, setFlash] = useState(false); // False or Obj
 
+  const LIBRARYMODEL = useMemo( () => new LibraryModel(), [] ) 
+  const USERMODEL = useMemo( () => new UserModel(), [] ) 
+
  
   return (
     <Router>
@@ -52,7 +58,11 @@ function App() {
 
         <Route path="/library" element={
           user !== false 
-          ? <Library setFlash={ setFlash } user={ user } />
+          ? <Library 
+              LIBRARYMODEL={ LIBRARYMODEL }
+              USERMODEL={ USERMODEL }
+              setFlash={ setFlash } 
+              user={ user } />
           : <MustLogin />
         } 
         />

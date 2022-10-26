@@ -64,4 +64,13 @@ export default class UserModel {
     return response
   }
 
+
+
+
+  async getUserSettings(id) {
+    const response = await fetch(`${this.URLROOT}?action=getUserSettings&query=${id}`)
+
+    return response.json()
+  }
+
 }

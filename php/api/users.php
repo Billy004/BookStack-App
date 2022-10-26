@@ -107,6 +107,16 @@ class Users {
     }
 
   }
+
+
+
+
+  public function getUserSettings($id) {
+    $this->stmt = $this->dbh->prepare('SELECT sort_method, filter_method FROM users WHERE id = :id');
+    $this->stmt->execute(['id' => $id]);
+
+    return $this->stmt->fetch(PDO::FETCH_OBJ);
+  }
 }
 
 
@@ -119,6 +129,7 @@ class Users {
 
 $users = new Users;
 $action = !empty($_GET['action']) ? $_GET['action'] : false;
+$query = !empty($_GET['query']) ? $_GET['query'] : false;
 
 
 
@@ -136,7 +147,7 @@ if ($action == 'login') {
 
   }
   
-  // set user Session
+  // TODO set user Session
 
   
 
@@ -171,6 +182,15 @@ if ($action == 'login') {
   $newSetting = json_decode($json, true);
 
   $users->toggleUserSetting($newSetting);
+
+
+
+
+} elseif ($action == 'getUserSettings') {
+
+  $settings = $users->getUserSettings($query);
+  
+  print_r( json_encode($settings, JSON_PRETTY_PRINT));
 
 
 
