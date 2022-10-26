@@ -53,9 +53,9 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
 
 
 
-  
-  const [sortMethod, setSortMethod] = useState()
-  const [filterMethod, setFilterMethod] = useState()
+  // Sorting and Filtering Methods - String or false
+  const [sortMethod, setSortMethod] = useState('title')
+  const [filterMethod, setFilterMethod] = useState('all')
   
 
   useEffect( () => {
@@ -70,21 +70,30 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
 
 
 
+
+
+  // Stores the library - Array of objects
   const [library, setLibrary] = useState([]);
 
   useEffect( () => {
     async function initLibrary() {
-      const lib =  await LIBRARYMODEL.getLibrary(user.id);
+      const lib =  await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod);
       setLibrary(lib)
     }
   
     initLibrary()
-  }, [LIBRARYMODEL, user])
+  }, [LIBRARYMODEL, user, sortMethod, filterMethod])
   
+
+
+
 
   // const [userAction, setUserAction] = useState(false)
   const [userAction, setUserAction] = useState('changeSettings')
   const showEmptySearchMsg = library.length === 0 ? true : false
+
+
+
 
 
   return(

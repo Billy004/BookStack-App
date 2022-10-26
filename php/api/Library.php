@@ -35,13 +35,28 @@ class Library {
 
 
 
-  public function getLibrary($user_id) {
-    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE user_id = :id');
-    $this->stmt->bindValue(':id', $user_id, PDO::PARAM_STR);
+  public function getLibrary($user_id, $sortMethod, $filterMethod) {
+
+    $sqlWhere = [
+      'all' => '',
+      'read' => 'WHERE is_read = 1 ',
+      'notRead' => 'WHERE is_read = 0 '
+    ];
+
+    $sql = [
+      'oldFirst' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY date_added ASC',
+      'newFirst' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY date_added DESC',
+      'title' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY title ASC',
+      'author' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY author ASC'
+    ];
+
+    $this->stmt = $this->dbh->prepare($sql[$sortMethod]);
     $this->stmt->execute();
 
     return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+
 
 
   public function getBookByIsbn($isbn) {
@@ -79,6 +94,7 @@ class Library {
 
 
   public function deleteBook($id) {
+    
     $bookToDelete = ['id' => $id];
     $this->stmt = $this->dbh->prepare("DELETE FROM library WHERE book_id = :id");
     $this->stmt->execute($bookToDelete);
@@ -89,8 +105,8 @@ class Library {
 
 
   public function searchLibrary($query) {
-    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE title LIKE :query OR author LIKE :query');
     
+    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE title LIKE :query OR author LIKE :query');
     $this->stmt->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
     $this->stmt->execute();
 
@@ -127,8 +143,13 @@ if ($action == 'getBook' && !empty($query)) {
 
 } elseif ($action == 'getLibrary' && !empty($query)) {
 
-  echo json_encode($library->getLibrary($query), JSON_PRETTY_PRINT);
+  $sortMethod = isset($_GET['sort']) ? $_GET['sort'] : 'title';
+  $filterMethod = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 
+  echo json_encode($library->getLibrary($query, $sortMethod, $filterMethod), JSON_PRETTY_PRINT);
+
+   
+  
 
 
 
