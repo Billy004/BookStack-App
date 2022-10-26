@@ -68,7 +68,8 @@ export default function Library ( { setFlash, user } ) {
   }, [LIBRARYMODEL, user])
   
 
-  const [userAction, setUserAction] = useState(false)
+  // const [userAction, setUserAction] = useState(false)
+  const [userAction, setUserAction] = useState('changeSettings')
   const showEmptySearchMsg = library.length === 0 ? true : false
 
 
@@ -125,6 +126,8 @@ export default function Library ( { setFlash, user } ) {
     {
       userAction === 'changeSettings' &&
       <ChangeSettings 
+        LIBRARYMODEL={ LIBRARYMODEL }
+        user={ user }
         sortMethod={ sortMethod }
         setSortMethod={ setSortMethod }
         filterMethod={ filterMethod }

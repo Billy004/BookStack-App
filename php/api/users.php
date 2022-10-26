@@ -78,6 +78,7 @@ class Users {
 
 
 
+
   public function getUserByEmail($email) {
     $this->stmt = $this->dbh->prepare('SELECT * FROM users WHERE email = :email');
     $this->stmt->execute(['email' => $email]);
@@ -85,7 +86,33 @@ class Users {
     return $this->stmt->fetch(PDO::FETCH_OBJ);
   }
 
+
+
+
+  public function toggleUserSetting($newSetting) {
+
+    if ($newSetting['setting'] == 'sort') {
+      $sql = "UPDATE users SET sort_method = :method WHERE id = :id";
+    }
+
+    if($newSetting['setting'] == 'filter') {
+      $sql = "UPDATE users SET filter_method = :method WHERE id = :id";
+    }
+
+    if (isset($sql)) {
+      $this->stmt = $this->dbh->prepare($sql);
+      $this->stmt->bindValue(':method', $newSetting['method'], PDO::PARAM_STR);
+      $this->stmt->bindValue(':id', $newSetting['id'], PDO::PARAM_STR);
+      $this->stmt->execute();
+    }
+
+  }
 }
+
+
+
+
+
 
 
 
@@ -104,7 +131,6 @@ if ($action == 'login') {
 
   if(!empty($login_attempt)) {
     echo json_encode($login_attempt, JSON_PRETTY_PRINT);
-    $_SESSION['user_id'] = $login_attempt->id;
   } else {
     echo '0';
 
@@ -113,9 +139,12 @@ if ($action == 'login') {
   // set user Session
 
   
+
+
 } elseif ($action == 'logout') {
   echo 'Log Out';
   
+
   
   
 } elseif ($action == 'signUp') {
@@ -134,10 +163,21 @@ if ($action == 'login') {
   }
 
 
+
   
+} elseif ($action == 'toggleUserSetting') {
   
+  $json = file_get_contents("php://input");
+  $newSetting = json_decode($json, true);
+
+  $users->toggleUserSetting($newSetting);
+
+
+
+
 } else {
-  echo 'Unknown Query';
+  echo 'Unknown Query: ';
+  echo $action;
 
 
 

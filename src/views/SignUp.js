@@ -48,7 +48,6 @@ export default function SignUp({ setFlash }) {
       })
     }
 
-    console.log(isSignedUp)
 
   }
 
@@ -75,7 +74,7 @@ export default function SignUp({ setFlash }) {
           <input type="password" name="confirmPassword" />
         </label>
 
-        <input type="submit" value="Log In" />
+        <input type="submit" value="Sign Up" />
 
       </form>
     </>

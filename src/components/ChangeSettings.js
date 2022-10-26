@@ -1,5 +1,7 @@
+import UserModel from "../model/UserModel"
 
-export default function ChangeSettings ({sortMethod, setSortMethod, filterMethod,setFilterMethod}) {
+
+export default function ChangeSettings ({user, sortMethod, setSortMethod, filterMethod,setFilterMethod}) {
 
   const baseStyle = {
     marginInline : '1rem',
@@ -8,12 +10,18 @@ export default function ChangeSettings ({sortMethod, setSortMethod, filterMethod
     borderRadius : '1rem',
   }
 
-  function handleMethodChange(method, param) {
-    switch (method) {
-      case 'sort': setSortMethod(param); break
-      case 'filter': setFilterMethod(param); break
+  const USERMODEL = new UserModel()
+
+  async function handleMethodChange(setting, value) {
+
+    await USERMODEL.toggleUserSetting(user.id, setting, value)
+
+    switch (setting) {
+      case ('sort'): setSortMethod(value); break
+      case ('filter'): setFilterMethod(value); break
       default:
     }
+
   }
 
   return(
