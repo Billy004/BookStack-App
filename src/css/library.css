@@ -1,0 +1,39 @@
+
+
+.user-actions {
+  display : flex;
+  justify-content: flex-end;
+  gap : 1rem;
+  padding : 0rem var(--padding-x-default) 2rem;
+  width : 100%;
+}
+
+
+.search-bar {
+  position: relative;
+  padding : 0;
+  margin : 0;
+}
+
+.search-label {
+  position: absolute;
+  top : 50%;
+  left : 0.5rem;
+  transform: translateY(-50%);
+  transition: all 250ms;
+}
+
+.search-bar-input {
+  margin : 0;
+}
+
+.search-bar-input:focus + .search-label {
+  top : 0;
+  transform: translateY(-1.3rem);
+}
+
+.library {
+  display : grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap : 1rem;
+}

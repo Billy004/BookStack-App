@@ -11,10 +11,9 @@ More Info coming soon
 #### TODO
 - UI/UX
   - make a kickass css layout
-  - light/dark mode
-- users
-  - add sessions with log in/out (cant do on localhost due to different ports)
-- user settings (sort, filter)
+  - light/dark mode?
+- add sessions with log in/out (cant do on localhost due to different ports)
+- hash passwords
 - use res.ok for fetch statements
 
 #### Bugs

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import imageNotAvailable from '../img/image-not-available.svg'
 
-export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrary}) {
+export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrary, sortMethod, filterMethod}) {
   
   if(!bookData.cover) bookData.cover = imageNotAvailable
 
@@ -59,7 +59,7 @@ export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrar
     }
 
     // Update UI
-    const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id)
+    const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod)
     setLibrary(updatedLibrary)
 
   }

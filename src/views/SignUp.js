@@ -2,15 +2,6 @@ import UserModel from "../model/UserModel"
 
 export default function SignUp({ setFlash }) {
 
-  const baseStyle = {
-    padding : '1rem',
-  }
-
-  const labelStyle = {
-    display : 'block',
-    marginBlock : '1rem',
-  }
-
   const USERMODEL = new UserModel()
 
   async function handleSignUp(e) {
@@ -52,29 +43,29 @@ export default function SignUp({ setFlash }) {
   }
 
   return(
-  <div style={ baseStyle }>
+  <div className="content-wrapper">
   
   <>
       <h3>Sign Up:</h3>
 
       <form onSubmit={ handleSignUp } >
         
-        <label style={ labelStyle }>
+        <label>
           Email<br />
           <input type="text" name="name" />
         </label>
         
-        <label style={ labelStyle }>
+        <label>
           Password<br />
           <input type="password" name="password" />
         </label>
 
-        <label style={ labelStyle }>
+        <label>
           Confirm Password<br />
           <input type="password" name="confirmPassword" />
         </label>
 
-        <input type="submit" value="Sign Up" />
+        <input type="submit" value="Sign Up" className="btn btn-pri" />
 
       </form>
     </>

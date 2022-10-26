@@ -1,16 +1,9 @@
 import UserModel from "../model/UserModel";
 import { Link } from "react-router-dom";
+import logo from '../img/logo.png'
+import heroImg from '../img/hero-img.png'
 
 export default function Home({user, setUser, setFlash}) {
-
-  const homeStyle = {
-    padding : '1rem',
-  }
-
-  const labelStyle = {
-    display : 'block',
-    marginBlock : '1rem',
-  }
 
   const USERMODEL = new UserModel()
 
@@ -27,8 +20,6 @@ export default function Home({user, setUser, setFlash}) {
       isLoggedIn = JSON.parse(isLoggedIn)
 
       setUser({ 'email' : isLoggedIn.email, 'id' : isLoggedIn.id })
-      
-      setFlash({ 'message' : `Logged in as ${isLoggedIn.email}`, 'type' : 'success' })
 
     } else {
 
@@ -38,47 +29,102 @@ export default function Home({user, setUser, setFlash}) {
   }
 
   return(
-  <div style={ homeStyle }>
-  
-  <h1>Welcome to BookStack!</h1>
-  <h2>Keep your Books organized</h2>
 
-  {
-    user ?
-    <>
-    <p>
-      You are logged in as {user.email}.
-    </p>
-    <p>
-      <Link to="/library">View your library</Link>
-    </p>
-    </>
+<section className="home-wrapper">
 
-    :
-    <>
-      <h3>Log in:</h3>
+  <div className="hero">
 
-      <form onSubmit={ handleLogin } >
+    <div className="logo">
+      <img src={ logo } alt="BookStack Logo" />
+      <span className="title">BookStack</span>
+    </div>
+
+    <div className="hero-wrapper">
+
+
+      {
+        !user &&
+
+        <div className="hero-welcome">
+
+          <h1>Organize Your Books!</h1>
+
+          <p>
+          Keep track of your personal library with BookStack. This app stores your entire book collection (inlcuding books you haven't read yet) in a digital format. 
+          </p>
+
+          <Link to="/about">
+            <button className="btn btn-sec">Learn More</button>
+        </Link>
+
+      </div>
+      }
+
+     
+
+
+      {
+      user ?
+      <>
+      <h2>Welcome to BookStack!</h2>
+      <p>
+        You are logged in as:
+      </p>
+      <p className="bold">
+        {user.email}
+      </p>
+      <p>
         
-        <label style={ labelStyle }>
-          Email<br />
-          <input type="text" name="name" />
-        </label>
-        
-        <label style={ labelStyle }>
-          Password<br />
-          <input type="password" name="password" />
-        </label>
+        <Link to="/library">
+          <button className="btn btn-pri mr2">
+            View your library
+          </button>
+        </Link>
 
-        <input type="submit" value="Log In" />
+        <Link to="/library">
+            Learn about this app
+        </Link>
+      </p>
+      </>
 
-      </form>
-    </>
-  }
+      :
+      <>
+        <h2>Log in to your account:</h2>
 
+        <form onSubmit={ handleLogin } >
+          
+          <label>
+            Email<br />
+            <input type="text" name="name" />
+          </label>
+          
+          <label>
+            Password<br />
+            <input type="password" name="password" />
+          </label>
+
+          <input type="submit" value="Sign In" className="btn btn-pri" />
+          
+          <Link to="/sign-up">
+            <span className="btn btn-ter">...or Sign Up</span>
+          </Link>
+
+        </form>
+      </>
+      }
+
+    </div> {/* hero-wrapper */}
+  </div> {/* hero */}
   
-  
+
+
+  <div className="hero-img" style={{ backgroundImage : `url(${heroImg})` } }>
   </div>
 
+
+
+
+
+</section>
   )
 }

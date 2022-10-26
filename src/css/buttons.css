@@ -1,0 +1,27 @@
+.btn {
+  display : inline-block;
+  padding : 0.5rem 2rem;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 0.03rem;
+  cursor : pointer;
+}
+
+.btn-pri {
+  padding-block : 0.7rem;
+  background-color: hsl(var(--clr-sec));
+  color : #000;
+}
+
+.btn-pri:hover, .btn-pri:focus {
+  background-color: hsl(var(--clr-pri-light));
+}
+
+.btn-sec {
+  background-color: hsla(0, 0%, 100%, 0.5);
+  border : 2px solid hsl(var(--clr-sec));
+}
+
+.btn-sec:hover, .btn-sec:focus {
+  border : 2px solid hsl(var(--clr-pri-dark));
+}

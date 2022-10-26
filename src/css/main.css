@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shanti&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
 
-@import url('utils.css');
+@import url('config.css');
+@import url('header.css');
+@import url('buttons.css');
 @import url('animations.css');
+@import url('utils.css');
+
+@import url('home.css');
+@import url('library.css');
 
 
 * {
@@ -11,24 +19,74 @@
 }
 
 body {
+  min-height : 100vh;
+  background: linear-gradient(
+    160deg,
+    hsl(232, 100%, 98%),
+    hsl(156, 100%, 96%),
+    hsl(232, 100%, 98%)
+  );
   font-family: Inter, Arial, sans-serif;
+
 }
 
-.container {
-  margin-inline: auto;
-  width : 100%;
-  max-width: 1300px;
-  padding-inline : 0.5rem;
+a { 
+  text-decoration : none;
+  color : hsl(var(--clr-pri));
+}
+
+a:hover, a:focus {
+  color : hsl(10, 24%, 50%);
 }
 
 img {
   max-width: 100%;
 }
 
-
-nav ul { display : none; }
-
-@media screen and (min-width : 600px) {
-  nav ul { display : flex; }
+h1, h2, h3 {
+  margin-block : 1rem;
+  font-family: var(--style-font);
 }
 
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+p {
+  line-height: 1.5rem;
+  margin-block: 1.7rem;
+}
+
+input {
+  display : block;
+  margin-block : 0.8rem;
+  padding : 0.5rem;
+  border-radius: 5px;
+  background-color: hsl(209, 100%, 95%);
+  border : 0;
+  outline : 0;
+  font-size : 1rem;
+}
+
+input[type=text], input[type=password] {
+  width : 100%;
+  max-width : 400px;
+}
+
+input[type=text]:hover, input[type=password]:hover,
+input[type=text]:focus, input[type=password]:focus {
+  outline : 1px solid hsl(var(--clr-pri-dark));
+}
+
+button {
+  border : 0;
+  outline : 0;
+}
+
+
+.content-wrapper {
+  margin-bottom : 2rem;
+  padding : 2rem var(--padding-x-default);
+  background-color: hsla(0, 0%, 100%, 0.7);
+  border-radius: 10px;
+}

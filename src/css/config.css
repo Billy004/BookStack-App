@@ -1,0 +1,15 @@
+
+:root {
+
+  --base-font : Inter, Helvetica, sans-serif;
+  --style-font : Shanti, Helvetica, sans-serif;
+  --design-font : 'Londrina Outline';
+
+  --padding-x-default : 2vw;
+
+  --clr-sec : 0, 100%, 95%;
+  --clr-pri : 210, 24%, 50%;
+  --clr-pri-light : 209, 100%, 95%;
+  --clr-pri-dark : 209, 100%, 75%;
+
+}
