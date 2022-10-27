@@ -1,5 +1,6 @@
 import debounce from "lodash.debounce"
 import { useMemo } from "react"
+import searchIcon  from '../img/icon-search.png'
 
 
 export default function SearchLibrary ({LIBRARYMODEL, setLibrary}) {
@@ -25,7 +26,8 @@ export default function SearchLibrary ({LIBRARYMODEL, setLibrary}) {
         onChange={ handleSearch } 
         className="search-bar-input"
       />
-      <span className="search-label">Search</span>
+      <span className="search-label">Search your library</span>
+      <img src={ searchIcon } className="search-icon" alt="Search" />
     </label>
 
   

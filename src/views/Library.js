@@ -4,6 +4,8 @@ import AddBookForm from "../components/AddBookForm";
 import SearchBar from "../components/SearchBar"
 import EmptySearchMsg from '../components/EmptySearchMsg'
 import ChangeSettings from "../components/ChangeSettings";
+import addBookBtn from '../img/icon-add-book.png'
+import settingsBtn from '../img/icon-settings.png'
 
 export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) {
 
@@ -57,14 +59,16 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
 
       <button
         onClick={ () => setUserAction( userAction !== 'changeSettings' ? 'changeSettings' : false ) }
+        className="btn-user-action"
       >
-        Settings
+        <img src={ settingsBtn } alt="Settings" />
       </button>
 
       <button 
         onClick={ () => setUserAction( userAction !== 'addBook' ? 'addBook' : false) } 
+        className="btn-user-action"
       >
-        { userAction !== 'addBook' ? 'Add Book' : 'Close' }
+        <img src={ addBookBtn } alt="Add Book" />
       </button>
 
       

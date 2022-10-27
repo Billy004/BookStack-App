@@ -2,6 +2,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import imageNotAvailable from '../img/image-not-available.svg'
+import iconIsRead from '../img/icon-book-isread.png'
+import iconIsNotRead from '../img/icon-book-notread.png'
+import iconMoreInfo from '../img/icon-book-more-info.png'
+import iconDelete from '../img/icon-delete-book.png'
 
 export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrary, sortMethod, filterMethod}) {
   
@@ -11,37 +15,6 @@ export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrar
   const bookId = bookData.book_id
   
   const [isRead, setIsRead] = useState(Number(bookData.is_read) === 1 ? true : false)
-
-
-  const bookStyle = {
-    border : '1px solid #333',
-    borderRadius : '0.5rem',
-    overflow : 'hidden',
-  }
-
-  const coverImgStyle = {
-    width : '100%',
-    maxWidth : '100%',
-    aspectRatio : '1 / 1.3', 
-    objectFit : 'cover',
-    objectPosition : 'top',
-    cursor : 'pointer',
-  }
-
-  const btnWrapperStyle = {
-    display : 'flex',
-    justifyContent : 'space-around',
-    width : '100%',
-    marginBlock : '0.5rem',
-  }
-
-  const btnStyle = {
-    padding : '0.3rem',
-    background : 'transparent',
-    border : '1px solid #aaa',
-    outline : '0',
-    cursor : 'pointer',
-  }
 
 
   async function handleDelete(title, id) {
@@ -73,32 +46,44 @@ export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrar
   }
 
   return(
-  <div style={ bookStyle } id={ isbn }>
+  <div id={ isbn } className="book">
 
-    <div>
-      <img 
-        src={  cover } 
-        alt={ `${ title } by ${ author } book cover` } 
-        style={ coverImgStyle } 
-        className="hover-expand"
-      />
+    <div className='book-cover-img'>
+      <Link to={ `/library/${isbn}` }>
+        <img 
+          src={  cover } 
+          alt={ `${ title } by ${ author } book cover` } 
+          className="hover-expand"
+        />
+      </Link>
     </div>
 
-    <div style={ btnWrapperStyle }>
+    <div className='book-btns'>
 
       <button 
-        style={ btnStyle }
-        onClick={ () => handleToggleReadStatus(bookId) }  
-        >
-        { isRead ? 'R' : 'U' }
+        onClick={ () => handleToggleReadStatus(bookId) } 
+        className="btn-book"
+      >
+        <img 
+          src={ isRead ? iconIsRead : iconIsNotRead } 
+          alt={ isRead 
+            ? 'You have read this book' 
+            : 'You haven\'t read this book yet' 
+          } 
+        />
       </button>
 
       <Link to={ `/library/${isbn}` }>
-        <button style={ btnStyle }>MI</button>
+        <button className="btn-book">
+          <img src={ iconMoreInfo } alt="More info" />
+        </button>
       </Link>
 
-      <button onClick={ () => handleDelete(title, bookId) } style={ btnStyle }>
-        DEL
+      <button 
+        onClick={ () => handleDelete(title, bookId) }
+        className="btn-book"
+      >
+          <img src={ iconDelete } alt="More info" />
       </button>
       
     </div>

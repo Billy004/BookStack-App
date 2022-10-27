@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import logo from '../img/logo.png'
+import Logo from './Logo'
 
 export default function Header({ user, setUser }) {
 
@@ -13,10 +13,7 @@ export default function Header({ user, setUser }) {
     
     <nav>
       
-      <div className="logo">
-        <img src={ logo } alt="BookStack Logo" />
-        <span className="title">BookStack</span>
-      </div>
+      <Logo />
 
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
@@ -25,7 +22,7 @@ export default function Header({ user, setUser }) {
         {
         user ?
         <>
-        <li><span class="bold">{ user.email }</span></li>
+        <li><span className="bold">{ user.email }</span></li>
         <li><button className="btn btn-sec" onClick={ () => setUser(false) }>Log Out</button></li>
         </>
         : <li><Link to="/sign-up" >Sign Up</Link></li>

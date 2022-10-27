@@ -22,7 +22,7 @@
   }
 }
 
-.hover-expand { transition: all 300ms ease-in; transform-origin: bottom; }
+.hover-expand { transition: all 200ms ease-in; transform-origin: bottom; }
 .hover-expand:hover {
-  transform: scale(1.2);
+  transform: scale(1.05);
 }

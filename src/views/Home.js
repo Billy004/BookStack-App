@@ -1,6 +1,6 @@
 import UserModel from "../model/UserModel";
 import { Link } from "react-router-dom";
-import logo from '../img/logo.png'
+import Logo from "../components/Logo";
 import heroImg from '../img/hero-img.png'
 
 export default function Home({user, setUser, setFlash}) {
@@ -34,10 +34,7 @@ export default function Home({user, setUser, setFlash}) {
 
   <div className="hero">
 
-    <div className="logo">
-      <img src={ logo } alt="BookStack Logo" />
-      <span className="title">BookStack</span>
-    </div>
+    <Logo />
 
     <div className="hero-wrapper">
 
@@ -70,8 +67,11 @@ export default function Home({user, setUser, setFlash}) {
       <p>
         You are logged in as:
       </p>
-      <p className="bold">
-        {user.email}
+      <p>
+        <span className="bold">
+          {user.email} 
+        </span>
+        &nbsp; Logout
       </p>
       <p>
         
