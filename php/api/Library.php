@@ -107,10 +107,15 @@ class Library {
 
 
 
-  public function searchLibrary($query) {
+  public function searchLibrary($query, $user) {
     
-    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE title LIKE :query OR author LIKE :query');
+    $this->stmt = $this->dbh->prepare('
+      SELECT * FROM library 
+      WHERE user_id = :user
+      AND (title LIKE :query OR author LIKE :query) 
+    ');
     $this->stmt->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
+    $this->stmt->bindValue(':user', $user, PDO::PARAM_STR);
     $this->stmt->execute();
 
     return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -179,10 +184,12 @@ if ($action == 'getBook' && !empty($query)) {
 
 } elseif ($action == 'searchLibrary') {
 
-  if (empty($query)){
-    echo json_encode($library->getLibrary(), JSON_PRETTY_PRINT);
+  $user = isset($_GET['user']) ? $_GET['user'] : false;
+
+  if ( !empty($query) && !empty($user) ){
+    echo json_encode( $library->searchLibrary($query, $user), JSON_PRETTY_PRINT );
   } else {
-    echo json_encode( $library->searchLibrary($query), JSON_PRETTY_PRINT );
+    echo 'Need a query and user argument';
   }
 
 

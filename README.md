@@ -17,3 +17,5 @@ More Info coming soon
 - use res.ok for fetch statements
 
 #### Bugs
+- search bar: if text is left in bar, label floats over text
+- searching searches all books, not just users books

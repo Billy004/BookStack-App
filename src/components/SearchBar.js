@@ -3,10 +3,17 @@ import { useMemo } from "react"
 import searchIcon  from '../img/icon-search.png'
 
 
-export default function SearchLibrary ({LIBRARYMODEL, setLibrary}) {
+export default function SearchLibrary ({LIBRARYMODEL, setLibrary, user, sortMethod, filterMethod}) {
 
   async function searchLibrary(e) {
-    const searchResults = await LIBRARYMODEL.searchLibrary(e.target.value)
+
+    let searchResults
+    if(e.target.value.length === 0) {
+      searchResults = await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod)
+    } else {
+      searchResults = await LIBRARYMODEL.searchLibrary(e.target.value, user.id)
+    }
+
     setLibrary(searchResults)
      
   }

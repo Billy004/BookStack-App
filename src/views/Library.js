@@ -75,6 +75,9 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
     <SearchBar 
       LIBRARYMODEL={ LIBRARYMODEL }
       setLibrary={ setLibrary }
+      user={ user }
+      sortMethod={ sortMethod }
+      filterMethod={ filterMethod }
     />
 
     </div>

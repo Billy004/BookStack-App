@@ -55,10 +55,10 @@ export default class LibraryModel {
 
 
 
-  async searchLibrary(query) {
+  async searchLibrary(query, userId) {
 
     try {
-      const searchResults = await fetch(`${this.URLROOT}?action=searchLibrary&query=${query}`)
+      const searchResults = await fetch(`${this.URLROOT}?action=searchLibrary&query=${query}&user=${userId}`)
 
       return searchResults.json()
     } catch (e) {
