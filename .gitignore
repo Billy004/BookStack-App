@@ -24,4 +24,4 @@ yarn-error.log*
 
 
 # php
-/config
+/php/config
