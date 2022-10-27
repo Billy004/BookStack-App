@@ -88,6 +88,8 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
         setLibrary={ setLibrary } 
         setUserAction={ setUserAction } 
         setFlash={ setFlash }
+        sortMethod={ sortMethod }
+        filterMethod={ filterMethod }
       />
     }
 

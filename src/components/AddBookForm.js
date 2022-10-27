@@ -1,7 +1,7 @@
 
 import { getGoogleBookInfo } from "../utils/google"
 
-export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary, setUserAction, setFlash } ) {
+export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary, setUserAction, setFlash, sortMethod, filterMethod } ) {
 
   const addBookStyle = {
     marginInline : '1rem',
@@ -88,7 +88,7 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
     }
 
     // Update Library in UI
-    const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id)
+    const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod)
     setLibrary(updatedLibrary)
 
     // Close Add Book Form

@@ -37,20 +37,23 @@ class Library {
 
   public function getLibrary($user_id, $sortMethod, $filterMethod) {
 
+    $sqlStart = 'SELECT * FROM library WHERE user_id = :id ';
+
     $sqlWhere = [
       'all' => '',
-      'read' => 'WHERE is_read = 1 ',
-      'notRead' => 'WHERE is_read = 0 '
+      'read' => 'AND is_read = 1 ',
+      'notRead' => 'AND is_read = 0 '
     ];
 
     $sql = [
-      'oldFirst' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY date_added ASC',
-      'newFirst' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY date_added DESC',
-      'title' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY title ASC',
-      'author' => 'SELECT * FROM library ' . $sqlWhere[$filterMethod] . 'ORDER BY author ASC'
+      'oldFirst' => $sqlStart . $sqlWhere[$filterMethod] . 'ORDER BY date_added ASC',
+      'newFirst' => $sqlStart . $sqlWhere[$filterMethod] . 'ORDER BY date_added DESC',
+      'title' => $sqlStart . $sqlWhere[$filterMethod] . 'ORDER BY title ASC',
+      'author' => $sqlStart . $sqlWhere[$filterMethod] . 'ORDER BY author ASC'
     ];
 
     $this->stmt = $this->dbh->prepare($sql[$sortMethod]);
+    $this->stmt->bindValue(':id', $user_id, PDO::PARAM_STR);
     $this->stmt->execute();
 
     return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
