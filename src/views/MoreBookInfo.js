@@ -15,6 +15,9 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
   const isbn = useParams().isbn
   const navigate = useNavigate()
 
+  function loseFocus() {
+    document.activeElement.blur()
+  }
 
   // Get Book Data
   const [book, setBook] = useState([])
@@ -71,7 +74,7 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
     </div>
 
 
-    <h2 className="book-more-info-h2">
+    <h2 className="book-more-info-title">
       <span>{title}</span>
 
       { subtitle && ': ' }
@@ -83,35 +86,57 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
     <span className="book-more-info-page-count">{pageCount} Pages</span>
     <span className="book-more-info-rating">{averageRating} / 5 with {ratingsCount} ratings</span>
 
-    <h3>Description</h3>
-    <p>{description}</p>
+    <div className="book-more-info-description">
+      <h3>Description</h3>
+      <p>{description}</p>
+    </div>
 
-    <button 
-      onClick={ () => {
-        LIBRARYMODEL.toggleReadStatus(bookUserData.book_id) 
-        setIsRead(isRead === '1' ? '0' : '1')
-      }}
-      className="btn-more-book-info"
-    > 
-    {isRead}
-      <img src={ isRead === '1' ? iconBookIsRead : iconBookNotRead } alt="" />
-    </button>
-    
-    <button
-      onClick={ () => {
-         LIBRARYMODEL.deleteBook(bookUserData.book_id) 
-         setFlash({
-          'message' : `${title} was deleted. Redirecting to Library in 5 seconds`,
-          'type' : 'success'
-         })
-         setTimeout( () => {
-          navigate('/library')
-         }, 5000 )
-      }}
-      className="btn-more-book-info"
-    >
-      <img src={ iconDeleteBook } alt="" />
-    </button>
+    <div className="book-more-info-user-actions">
+      <div className="my1">
+        <button 
+          onClick={ () => {
+            LIBRARYMODEL.toggleReadStatus(bookUserData.book_id) 
+
+            setIsRead(isRead === '1' ? '0' : '1')
+
+            loseFocus()
+          }}
+          className="btn-more-book-info"
+          > 
+          <span>
+              <img src={ isRead === '1' ? iconBookIsRead : iconBookNotRead } alt="" />
+          </span>
+          &nbsp; You have { isRead !== '1' && 'not ' } read this book.
+        </button>
+      
+      </div>
+
+      <div className="my1">
+        <button
+          onClick={ () => {
+            LIBRARYMODEL.deleteBook(bookUserData.book_id) 
+
+            setFlash({
+              'message' : `${title} was deleted. Redirecting to Library in 5 seconds`,
+              'type' : 'success'
+            })
+
+            setTimeout( () => {
+              navigate('/library')
+            }, 5000 )
+
+            loseFocus()
+          }}
+          className="btn-more-book-info"
+          >
+          <span>
+            <img src={ iconDeleteBook } alt="" />
+          </span>
+          &nbsp; Delete this book.
+        </button>
+
+      </div>
+    </div>
 
   
   </div>

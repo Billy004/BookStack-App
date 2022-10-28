@@ -8,8 +8,11 @@
   --padding-x-default : 2vw;
 
   --clr-sec : 0, 100%, 95%;
+  --clr-sec-dark : 0, 100%, 70%;
   --clr-pri : 210, 24%, 50%;
   --clr-pri-light : 209, 100%, 95%;
   --clr-pri-dark : 209, 100%, 75%;
+
+  --link-transition : all 150ms ease-in-out;
 
 }

@@ -35,7 +35,6 @@ function App() {
   const USERMODEL = useMemo( () => new UserModel(), [] ) 
 
 
-  console.log(user)
   return (
     <Router>
 

@@ -44,7 +44,25 @@
 }
 
 .btn-more-book-info {
+  cursor: pointer;
+  padding : 5px;
+  background-color: transparent;
+}
+
+.btn-more-book-info:hover,
+.btn-more-book-info:focus {
+  color : hsl( var(--clr-sec-dark) );
+}
+
+.btn-more-book-info span {
+  display : inline-block;
+  height : 100%;
   padding : 5px;
   border-radius : 5px;
-  background-color : hsl( var(--clr-pri), 0.9 )
+  background-color : hsl( var(--clr-pri), 0.9 );
+}
+
+.btn-more-book-info:hover span,
+.btn-more-book-info:focus span {
+  background-color: hsl( var(--clr-sec-dark) );
 }

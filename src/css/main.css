@@ -34,10 +34,15 @@ body {
 a { 
   text-decoration : none;
   color : hsl(var(--clr-pri));
+  transition: var( --link-transition );
 }
 
 a:hover, a:focus {
-  color : hsl(10, 24%, 50%);
+  color : hsl( var(--clr-sec-dark) );
+}
+
+button, button > * {
+  transition: var( --link-transition );
 }
 
 img {

@@ -1,5 +1,9 @@
 
 
+.book-more-info > * {
+}
+
+
 .book-more-info-back {
   display : flex;
   align-items: center;
@@ -16,7 +20,7 @@
   border-radius: 10px;
 }
 
-.book-more-info-h2 {
+.book-more-info-title {
   text-align: center;
 }
 
@@ -28,4 +32,39 @@
   margin-block: 0.5rem;
   text-align: center;
   color : #717171;
+}
+
+
+/* Grid Layout for bigger screens */
+
+@media screen and (min-width : 750px) {
+
+  .book-more-info {
+    display : grid;
+    align-items: flex-start;
+    column-gap: 5rem;
+    grid-template-areas: 
+      "back back"
+      "cover rating"
+      "cover title"
+      "cover authors"
+      "cover categories"
+      "cover pages"
+      "cover description"
+      "user-actions description";
+  }
+
+  .book-more-info * { text-align: left; }
+
+  .book-more-info-back { grid-area: back; }
+  .book-more-info-img-wrapper { grid-area: cover; }
+  .book-more-info-title { grid-area: title; }
+  .book-more-info-authors { grid-area: authors; }
+  .book-more-info-categories { grid-area: categories; }
+  .book-more-info-page-count { grid-area: pages; }
+  .book-more-info-rating { grid-area: rating; }
+  .book-more-info-description { grid-area: description; }
+  .book-more-info-user-actions { grid-area: user-actions; }
+  .book-more-info-user-actions > * { display : block; }
+
 }

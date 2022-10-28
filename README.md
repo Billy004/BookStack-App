@@ -12,6 +12,9 @@ More Info coming soon
 - UI/UX
   - make a kickass css layout
   - light/dark mode?
+  - mobile menu
+  - make responsive
+- rating stars
 - add sessions with log in/out (cant do on localhost due to different ports)
 - hash passwords
 - use res.ok for fetch statements
