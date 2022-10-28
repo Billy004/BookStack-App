@@ -35,7 +35,7 @@ function App() {
   const USERMODEL = useMemo( () => new UserModel(), [] ) 
 
 
-
+  console.log(user)
   return (
     <Router>
 
@@ -69,11 +69,26 @@ function App() {
         } 
         />
 
-        <Route path="/library/:isbn" element={<MoreBookInfo />} />
+        <Route 
+          path="/library/:isbn" 
+          element={
+            <MoreBookInfo 
+              LIBRARYMODEL={ LIBRARYMODEL }
+              user={ user }
+              setFlash={ setFlash }
+            />
+          } 
+        />
 
-        <Route path="/about" element={<About />} />
+        <Route 
+          path="/about" 
+          element={<About />} 
+        />
 
-        <Route path="/sign-up" element={<SignUp setFlash={ setFlash } />} />
+        <Route 
+          path="/sign-up" 
+          element={<SignUp setFlash={ setFlash } />} 
+        />
 
       </Routes>
 

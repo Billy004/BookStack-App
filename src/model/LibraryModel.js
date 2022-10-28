@@ -42,6 +42,14 @@ export default class LibraryModel {
 
 
 
+  async getBookByUser(userId, isbn) {
+    const book = await fetch(`${this.URLROOT}?action=getBookByUser&query=${userId}&isbn=${isbn}`)
+
+    return book.json()
+  }
+
+
+
   async deleteBook(id) {
     try {
       const deletedBook = await fetch(`${this.URLROOT}?action=deleteBook&query=${id}`) 

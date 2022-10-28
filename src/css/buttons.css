@@ -42,3 +42,9 @@
   background: transparent;
   cursor : pointer;
 }
+
+.btn-more-book-info {
+  padding : 5px;
+  border-radius : 5px;
+  background-color : hsl( var(--clr-pri), 0.9 )
+}

@@ -3,6 +3,9 @@ import Logo from './Logo'
 
 export default function Header({ user, setUser }) {
 
+  function loseFocus() {
+    document.activeElement.blur()
+  }
   
   const currentPage = useLocation().pathname
 
@@ -16,9 +19,33 @@ export default function Header({ user, setUser }) {
       <Logo />
 
       <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/library">Library</Link></li>
-        <li><Link to="/about">About</Link></li>
+        <li>
+          <Link 
+            to="/" 
+            className={ currentPage === '/' ? 'active-nav-link' : '' }
+            onClick={ loseFocus }
+          >
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/library" 
+            className={ currentPage.includes('/library') && 'active-nav-link' }
+            onClick={ loseFocus }
+          >
+            Library
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/about"
+            className={ currentPage.includes('/about') && 'active-nav-link' }
+            onClick={ loseFocus }
+          >
+            About
+          </Link>
+        </li>
         {
         user ?
         <>

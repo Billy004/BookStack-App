@@ -33,6 +33,10 @@ nav li a {
   font-weight: 600;
 }
 
+.active-nav-link {
+  border-bottom : 2px solid hsl(var(--clr-pri));
+}
+
 @media screen and (min-width : 600px) {
   .nav-links { 
     display : flex; 
@@ -40,4 +44,5 @@ nav li a {
     gap : 1.5rem;
   }
 }
+
 

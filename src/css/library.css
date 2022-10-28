@@ -55,7 +55,7 @@
 }
 
 .book:hover .book-btns,
-.book:focus .book-btns {
+.book:focus .book-btns{
   opacity: 1;
 }
 
@@ -73,7 +73,7 @@
   display : flex;
   justify-content: space-evenly;
   padding : 5px;
-  background-color: hsla(215, 64%, 9%, 0.7);
-  opacity: 0.3;
+  background-color: hsla(214, 95%, 17%, 0.7);
+  opacity: 0.5;
 }
 

@@ -15,7 +15,7 @@ More Info coming soon
 - add sessions with log in/out (cant do on localhost due to different ports)
 - hash passwords
 - use res.ok for fetch statements
+- redirect after sign up
 
 #### Bugs
 - search bar: if text is left in bar, label floats over text
-- searching searches all books, not just users books

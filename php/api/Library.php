@@ -84,6 +84,19 @@ class Library {
 
 
 
+  public function getBookByUser($user, $isbn) {
+
+    $this->stmt = $this->dbh->prepare('SELECT * FROM library WHERE user_id = :user AND isbn = :isbn');
+    $this->stmt->bindValue(':user', $user, PDO::PARAM_STR);
+    $this->stmt->bindValue(':isbn', $isbn, PDO::PARAM_STR);
+    $this->stmt->execute();
+
+    return( $this->stmt->fetch(PDO::FETCH_OBJ) );
+
+  }
+
+
+
   public function addBook($newBook) {
 
     $sql = "
@@ -146,6 +159,17 @@ if ($action == 'getBook' && !empty($query)) {
 
   echo json_encode($library->getBookByIsbn($query),JSON_PRETTY_PRINT);
 
+
+
+} elseif($action == 'getBookByUser') {
+
+    $user = $query;
+    $isbn = $_GET['isbn'];
+
+    $bookData = $library->getBookByUser($user, $isbn);
+
+    
+    echo json_encode($bookData, JSON_PRETTY_PRINT);
 
 
 
