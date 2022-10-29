@@ -41,8 +41,10 @@
 
   .book-more-info {
     display : grid;
-    align-items: flex-start;
+    align-items: start;
     column-gap: 5rem;
+    row-gap: 0;
+    grid-template-rows: auto;
     grid-template-areas: 
       "back back"
       "cover rating"
@@ -51,7 +53,7 @@
       "cover categories"
       "cover pages"
       "cover description"
-      "user-actions description";
+      "user-actions user-actions";
   }
 
   .book-more-info * { text-align: left; }
