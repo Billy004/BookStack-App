@@ -36,7 +36,7 @@ function App() {
 
 
   return (
-    <Router>
+    <Router basename="/projects/bookstack-app/build" >
 
     <div className="App container">
 

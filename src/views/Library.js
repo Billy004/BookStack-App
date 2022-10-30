@@ -105,6 +105,7 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
         setSortMethod={ setSortMethod }
         filterMethod={ filterMethod }
         setFilterMethod={ setFilterMethod }
+        setUserAction= { setUserAction }
       />
     }
 

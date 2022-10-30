@@ -12,15 +12,27 @@
 @keyframes slide-down {
   from {
     opacity : 0;
-    /* transform: translateY(-25%); */
     max-height : 0;
   }
   to {
     opacity : 1;
     max-height : 500px;
-    /* transform: translateY(0); */
   }
 }
+
+.slide-down-exit { animation: slide-down-exit 500ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden; }
+
+@keyframes slide-down-exit {
+  from {
+    opacity : 1;
+    max-height : 500px;
+  }
+  to {
+    opacity : 0;
+    max-height : 0;
+  }
+}
+
 
 .hover-expand { transition: all 200ms ease-in; transform-origin: bottom; }
 .hover-expand:hover {

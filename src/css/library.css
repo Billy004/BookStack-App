@@ -77,3 +77,35 @@
   opacity: 0.5;
 }
 
+.user-actions-modal {
+  position : relative;
+  padding : 1rem;
+  border-radius: 10px;
+  background-color: hsl(210, 130%, 98%);
+}
+
+.btn-close-user-action {
+  position: absolute;
+  top : 1rem;
+  right : 1rem;
+}
+
+.user-actions-input {
+  display : inline-block;
+}
+
+
+.setting, .setting-active {
+  display : inline-block;
+  padding : 0.5rem 1rem;
+  margin-right : 1rem;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.setting-active {
+  /* border : 1px solid hsl( var(--clr-sec-dark) ); */
+  background-color: hsl( var(--clr-sec) );
+  border-radius: 5px;
+}

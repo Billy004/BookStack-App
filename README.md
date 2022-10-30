@@ -9,11 +9,7 @@ Users and books are stored in a MYSQL database, which is returned to an API with
 More Info coming soon
 
 #### TODO
-- UI/UX
-  - make a kickass css layout
-  - light/dark mode?
-  - mobile menu
-  - make responsive
+- make responsive
 - rating stars
 - add sessions with log in/out (cant do on localhost due to different ports)
 - hash passwords

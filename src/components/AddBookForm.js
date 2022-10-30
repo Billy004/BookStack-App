@@ -1,28 +1,10 @@
 
 import { getGoogleBookInfo } from "../utils/google"
+import { useRef } from "react"
 
 export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary, setUserAction, setFlash, sortMethod, filterMethod } ) {
 
-  const addBookStyle = {
-    marginInline : '1rem',
-    padding : '1rem',
-    border : '1px solid #ddd',
-    borderRadius : '1rem',
-  }
-
-  const labelStyle = {
-    display : 'block',
-  }
-
-  const submitStyle = {
-    padding : '1rem 2rem',
-    backgroundColor : '#E6B2B2',
-    border : '2px solid #571D1D',
-    borderRadius : '0.5rem',
-    fontWeight : '600',
-    cursor : 'pointer',
-  }
-
+  const wrapper = useRef()
 
   async function handleSubmit(e) {
 
@@ -105,36 +87,51 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
 
   }
 
+
   return(
-  <div style={ addBookStyle } className="slide-down">
+  <div className="user-actions-modal slide-down" ref={ wrapper }>
+
+    <button
+      className="btn btn-close-user-action"
+      onClick={ (e) => {
+        // console.log(e.target, 'eve')
+        wrapper.current.classList.remove('slide-down')
+        wrapper.current.classList.add('slide-down-exit')
+        setTimeout( () => {
+          setUserAction(false) 
+        }, 500)
+      }} 
+    >
+      Close
+    </button>
 
     <h2 className="mb2">Add A New Book</h2>
 
     <form onSubmit={ handleSubmit }>
 
-      <label style={ labelStyle } className="mb3">
-        <span>
+      <label className="mb3">
           Isbn:
-        </span>
 
-        <input type="text" name="isbn" className="ml1" />
+        <input type="text" name="isbn" className="user-actions-input ml1" />
       </label>
 
       <div className="mb1">
         Have you read this book yet?
       </div>
 
-      <label style={ labelStyle } className="mb1">
-          <input type="radio" name="read" value="true" className="mr1" />
-          Yes 
-      </label>
+      <div>
+        <label className="mb1 mr1">
+            <input type="radio" name="read" value="true" className="user-actions-input" />
+            Yes 
+        </label>
 
-      <label style={ labelStyle }>
-          <input type="radio" name="read" value="false" className="mr1" />
-          No
-      </label>
+        <label>
+            <input type="radio" name="read" value="false" className="user-actions-input" />
+            No
+        </label>
+      </div>
 
-      <input type="submit" value="Add Book" style={ submitStyle } className="mt3" />
+      <input type="submit" value="Add Book" className="mt1 btn btn-pri" />
 
     </form>
   

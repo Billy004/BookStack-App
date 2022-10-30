@@ -71,7 +71,13 @@ export default function Home({user, setUser, setFlash}) {
         <span className="bold">
           {user.email} 
         </span>
-        &nbsp; Logout
+
+        <button 
+          className="btn"
+          onClick={ () => setUser(false) }
+        >
+          Logout
+        </button>
       </p>
       <p>
         
@@ -90,6 +96,7 @@ export default function Home({user, setUser, setFlash}) {
       :
       <>
         <h2>Log in to your account:</h2>
+        <span>Hint: Log in as "guest" with password "123456"</span>
 
         <form onSubmit={ handleLogin } >
           

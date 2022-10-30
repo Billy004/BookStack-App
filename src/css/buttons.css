@@ -23,6 +23,10 @@
   border : 2px solid hsl(var(--clr-sec));
 }
 
+.btn-ter {
+  
+}
+
 .btn-sec:hover, .btn-sec:focus {
   border : 2px solid hsl(var(--clr-pri-dark));
 }

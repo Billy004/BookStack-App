@@ -1,6 +1,6 @@
 <?php
 // required headers
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: https://www.joshkaye.ca");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: *");
 header("Access-Control-Max-Age: 3600");
@@ -35,7 +35,7 @@ class Library {
 
 
 
-  public function getLibrary($user_id, $sortMethod, $filterMethod) {
+  public function getLibrary($user_id, $sortMethod="title", $filterMethod="all") {
 
     $sqlStart = 'SELECT * FROM library WHERE user_id = :id ';
 
@@ -175,8 +175,9 @@ if ($action == 'getBook' && !empty($query)) {
 
 } elseif ($action == 'getLibrary' && !empty($query)) {
 
-  $sortMethod = isset($_GET['sort']) ? $_GET['sort'] : 'title';
-  $filterMethod = isset($_GET['filter']) ? $_GET['filter'] : 'all';
+  $sortMethod = !empty($_GET['sort']) ? $_GET['sort'] : 'title';
+  $filterMethod = !empty($_GET['filter']) ? $_GET['filter'] : 'all';
+
 
   echo json_encode($library->getLibrary($query, $sortMethod, $filterMethod), JSON_PRETTY_PRINT);
 

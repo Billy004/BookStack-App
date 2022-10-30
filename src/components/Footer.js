@@ -1,7 +1,7 @@
 export default function Footer () {
 
   const footerStyle = {
-    padding : '1rem',
+    padding : '5rem',
     backgroundColor : '#0F0A44',
     color : '#fff',
     borderRadius : '0.3rem',
@@ -11,7 +11,6 @@ export default function Footer () {
   return(
   <div style={ footerStyle }>
   
-    You have X total pages in your library <br />
     Made By Josh =)
   
   </div>

@@ -1,6 +1,6 @@
 export default class LibraryModel {
 
-  URLROOT = 'http://localhost:80/projects/BookStack-App/bookstack-app/php/api/library.php'
+  URLROOT = '/projects/bookstack-app/php/api/Library.php'
 
   async getLibrary(userId, sortMethod, filterMethod) {
     try {
