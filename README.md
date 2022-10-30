@@ -3,10 +3,10 @@
 ### Version number 1.0.0
 
 BookStack is a custom Full-Stack web app that I programmed from the ground up as a portfolio project.
+View the project here:
+https://joshkaye.ca/projects/bookstack-app/build
 
-Users and books are stored in a MYSQL database, which is returned to an API with PHP. React then dynamically access this API to implement basic CRUD operations.
-
-More Info coming soon
+Users and books are stored in a MYSQL database, which is returned to an API with PHP. React then dynamically access this API to implement basic CRUD operations. It fetches book information from the google books API.
 
 #### TODO
 - make responsive
