@@ -18,6 +18,8 @@ Users and books are stored in a MYSQL database, which is returned to an API with
 /src/utils -> JS Utility Functions
 - google.js -> getGoogleBookInfo(isbn)
 
+/src/views -> React Pages
+
 /src/model -> JS interactions with Databases/API
 - LibraryModel.js -> class LibraryModel
   - getLibrary()
