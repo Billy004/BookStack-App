@@ -7,12 +7,16 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
   const wrapper = useRef()
 
   async function handleSubmit(e) {
-
+    
     e.preventDefault()
+    
 
+    // Get Form Data and Set Variables
     let isbn = e.target[0].value
     let bookIsRead = e.target[1].checked
-
+    
+    
+    // Check if ISBN is entered
     if (!isbn) {
       setFlash({
         message : 'Please Enter an ISBN',
@@ -20,11 +24,10 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
       })
       return
     }
-  
-    const userHasBook = library.find( (book) => {
-      return book.isbn === isbn
-    } )
-
+    
+    // Check if book is already in the users library
+    const userHasBook = library.find( book => book.isbn === isbn )
+    
     if(userHasBook) {
       setFlash({
         message : `This book is already in your Library.`,
@@ -35,51 +38,43 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
       return
     }
   
-
-    const googleResponse = await getGoogleBookInfo(isbn)
-
-    if (!googleResponse) return 'Error fetching book data from Google API'
-
-    let cover
+    // Get book data from google
+    let res
     try {
-      cover = googleResponse.imageLinks.thumbnail
-    } catch (err) {
-      cover = false
+      res = await getGoogleBookInfo(isbn)
+    } catch (error) {
+      console.log(error)
+      return 'Error fetching book data from Google API'
     }
 
+    // Check if book has cover (some dont)
+    let cover = (res.imageLinks !== undefined) ? res.imageLinks.thumbnail : false
+
+
+    // Add book entry to DB
     const newBook = {
       isbn,
       bookIsRead,
       cover,
       date : new Date().valueOf(),
-      title : googleResponse.title,
-      author : googleResponse.authors[0],
-      pages : googleResponse.pageCount,
+      title : res.title,
+      author : res.authors[0],
+      pages : res.pageCount,
       userId : user.id,
     }
 
-    // Add Book to DB. If 'duplicate' is returned let the user know the book was already added
-    if (await LIBRARYMODEL.addBook(newBook) === 'duplicate') {
-      setFlash({
-        message : `${googleResponse.title} is already in your library. (ISBN# ${isbn})`, 
-        type : 'fail',
-        link : `#${isbn}`,
-        linkText : 'View Book'
-      })
-      return
-    }
+    await LIBRARYMODEL.addBook(newBook)
 
     // Update Library in UI
     const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod)
     setLibrary(updatedLibrary)
 
     // Close Add Book Form
-    // toggleShowAddBookForm(!showAddBookForm)
     setUserAction(false)
 
     // Update flash message
     setFlash({
-      message : `${ googleResponse.title } Added Successfully`,
+      message : `${ res.title } Added Successfully`,
       type : 'success',
       link : `#${ isbn }`,
       linkText : 'View Book'
