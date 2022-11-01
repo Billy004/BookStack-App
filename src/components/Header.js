@@ -31,7 +31,7 @@ export default function Header({ user, setUser }) {
         <li>
           <Link 
             to="/library" 
-            className={ currentPage.includes('/library') && 'active-nav-link' }
+            className={ currentPage.includes('/library') ? 'active-nav-link' : undefined }
             onClick={ loseFocus }
           >
             Library
@@ -40,7 +40,7 @@ export default function Header({ user, setUser }) {
         <li>
           <Link 
             to="/about"
-            className={ currentPage.includes('/about') && 'active-nav-link' }
+            className={ currentPage.includes('/about') ? 'active-nav-link' : undefined }
             onClick={ loseFocus }
           >
             About

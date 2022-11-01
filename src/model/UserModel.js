@@ -1,6 +1,10 @@
 export default class UserModel {
 
-  URLROOT = '/projects/bookstack-app/php/api/Users.php'
+  // joshkaye.ca
+  // URLROOT = '/projects/bookstack-app/php/api/Users.php'
+
+  // localhost
+  URLROOT = 'http://localhost:80/projects/BookStack-App/bookstack-app/php/api/Users.php'
 
   async login(email, pass) {
 
@@ -16,6 +20,7 @@ export default class UserModel {
     }
 
     const response = await fetch(`${this.URLROOT}?action=login`, requestOptions)
+
    
     return response
   }
