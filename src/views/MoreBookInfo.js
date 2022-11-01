@@ -12,9 +12,13 @@ import LoadingSpinner from "../components/LoadingSpinner"
 
 export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
 
+  // Get ISBN from URL
   const isbn = useParams().isbn
+  
+  // For redirection
   const navigate = useNavigate()
 
+  // Lose focus from input
   function loseFocus() {
     document.activeElement.blur()
   }
@@ -46,8 +50,10 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
     title, 
   } = book
 
+  // Use "image not available" image if no book is in database. 
   const cover = book.imageLinks ? book.imageLinks.smallThumbnail : imageNotAvailable
 
+  // Format Authors based on if there is a single or multiple author
   let authors =''
   if (book.authors !== undefined) book.authors.forEach( author => authors += `${author}, `)
   authors = authors.slice(0, -2)

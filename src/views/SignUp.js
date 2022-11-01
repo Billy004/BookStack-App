@@ -7,10 +7,12 @@ export default function SignUp({ setFlash }) {
   async function handleSignUp(e) {
     e.preventDefault()
 
+    // Get form Data
     const email = e.target[0].value
     const password = e.target[1].value
     const confirmPassword = e.target[2].value
-    
+
+    //Check if password and confirm password match
     if (password !== confirmPassword) {
       setFlash({
         message : 'The two password entries do not match',
@@ -19,9 +21,11 @@ export default function SignUp({ setFlash }) {
       return
     }
 
+    // Attempt sign up
     const response = await USERMODEL.signUp(email, password)
     const isSignedUp = await response.text()
 
+    // Handle sign up attempt
     if(isSignedUp && (isSignedUp !== 'duplicate')) {
       setFlash({
         message : `${isSignedUp}, you have successfully signed up to BookStack!`,

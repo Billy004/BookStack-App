@@ -15,6 +15,7 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
   const [filterMethod, setFilterMethod] = useState('all')
   
 
+  // Get User settings from User Model
   useEffect( () => {
     async function getUserSettings() {
       const userSettings = await USERMODEL.getUserSettings(user.id)
@@ -32,6 +33,7 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
   // Stores the library - Array of objects
   const [library, setLibrary] = useState([]);
 
+  // Gets library from DB
   useEffect( () => {
     async function initLibrary() {
       const lib =  await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod);
@@ -44,7 +46,7 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
 
 
 
-
+  // userAction -> View A User Action Dialog (Add Book, Change Settings). String or false
   const [userAction, setUserAction] = useState(false)
   const showEmptySearchMsg = library.length === 0 ? true : false
 

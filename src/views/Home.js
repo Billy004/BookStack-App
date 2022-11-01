@@ -5,8 +5,12 @@ import heroImg from '../img/hero-img.png'
 
 export default function Home({user, setUser, setFlash}) {
 
+
+  // User DB functions
   const USERMODEL = new UserModel()
 
+
+  
   async function handleLogin(e) {
     e.preventDefault()
     const email = e.target[0].value

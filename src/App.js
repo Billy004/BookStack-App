@@ -1,4 +1,5 @@
 
+
 import { useState, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -31,6 +32,8 @@ function App() {
   // obj { message : 'Message to user', type : 'success or fail' } 
   const [flash, setFlash] = useState(false); // False or Obj
 
+
+  // Get DB interaction classes
   const LIBRARYMODEL = useMemo( () => new LibraryModel(), [] ) 
   const USERMODEL = useMemo( () => new UserModel(), [] ) 
 
