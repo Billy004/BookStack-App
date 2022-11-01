@@ -25,6 +25,7 @@ export default class LibraryModel {
 
   async addBook(data) {
     // Called by handleAddBook im <AddBookForm />. userHasBook already checked.
+
     const requestOptions = {
       method : 'POST',
       headers : { 'Content-Type': 'application/json' },
@@ -32,6 +33,7 @@ export default class LibraryModel {
     }
 
     await fetch(`${this.URLROOT}?action=addBook`, requestOptions)
+
 
   }
 

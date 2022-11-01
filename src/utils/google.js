@@ -3,14 +3,17 @@
 
 export async function getGoogleBookInfo(isbn) {
   try {
-      const google = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=AIzaSyDMCCAwAVRo5YHS07hVrUDtBCzx1VPEcTo`)
+      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=AIzaSyDMCCAwAVRo5YHS07hVrUDtBCzx1VPEcTo`)
       
-      const data = await google.json()
+      if(res.ok) {
+        const data = await res.json()
+        return data.items[0].volumeInfo
+      } else {
+        return 'Error fetching data from google. (In function getGoogleBookInfo)'
+      }
       
-      return data.items[0].volumeInfo
-      // return data
   } catch(err) {
-      return false
+      return 'Error fetching data from google. (In function getGoogleBookInfo)'
   }
 
 }

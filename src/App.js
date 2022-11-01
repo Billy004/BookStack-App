@@ -29,10 +29,12 @@ function App() {
   
   // Determines flash message
   // obj { message : 'Message to user', type : 'success or fail' } 
-  const [flash, setFlash] = useState(false); // False or Obj
+  // const [flash, setFlash] = useState(false); // False or Obj
+  const [flash, setFlash] = useState({message : 'test', type : 'fail'}); // False or Obj
 
   const LIBRARYMODEL = useMemo( () => new LibraryModel(), [] ) 
   const USERMODEL = useMemo( () => new UserModel(), [] ) 
+
 
 
   return (

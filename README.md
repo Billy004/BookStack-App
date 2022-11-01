@@ -10,10 +10,11 @@ Users and books are stored in a MYSQL database, which is returned to an API with
 
 #### TODO
 - make responsive
+- change ugly error color
 - rating stars
 - add sessions with log in/out (cant do on localhost due to different ports)
 - hash passwords
-- use res.ok for fetch statements
+- error handling with async code
 - redirect after sign up
 
 #### Bugs

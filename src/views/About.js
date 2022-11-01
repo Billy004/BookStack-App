@@ -22,7 +22,7 @@ export default function About () {
   </p>
 
   <p style={ pStyle }>
-    BookStack is a custom Full-Stack web app that I programmed from the ground up as a portfolio project. It features a front-end UI made with <strong>React</strong>, and a backend with <strong> PHP and MYSQL</strong>. You can also <a href="https://github.com/kaye360/BookStack-App" target="_blank">View the Github repo.</a>
+    BookStack is a custom Full-Stack web app that I programmed from the ground up as a portfolio project. It features a front-end UI made with <strong>React</strong>, and a backend with <strong> PHP and MYSQL</strong>. You can also <a href="https://github.com/kaye360/BookStack-App" target="_blank" rel="noreferrer">View the Github repo.</a>
   </p>
 
   <p style={ pStyle }>

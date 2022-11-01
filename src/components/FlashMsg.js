@@ -11,8 +11,8 @@ export default function FlashMsg ({ flash, setFlash }) {
   }
 
   if (flash.type === 'fail') {
-    bgClr = '#E6B2B2'
-    borderClr = '#C03F3F';
+    bgClr = 'hsl( var(--clr-sec) )'
+    borderClr = 'hsl( var(--clr-sec-dark) )';
   }
 
   const flashStyle = {
