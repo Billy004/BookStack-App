@@ -8,14 +8,63 @@ https://joshkaye.ca/projects/bookstack-app/build
 
 Users and books are stored in a MYSQL database, which is returned to an API with PHP. React then dynamically access this API to implement basic CRUD operations. It fetches book information from the google books API.
 
-#### TODO
+
+## App Structure
+/src/img -> Static Images
+/src/css -> Static CSS
+
+/src/components -> All React Components
+
+/src/utils -> JS Utility Functions
+- google.js -> getGoogleBookInfo(isbn)
+
+/src/model -> JS interactions with Databases/API
+- LibraryModel.js -> class LibraryModel
+  - getLibrary()
+  - addBook()
+  - getBook()
+  - getBookByUser()
+  - deleteBook()
+  - searchLibrary()
+  - toggleReadStatus()
+- UserModel.js -> class UserModel
+  - login()
+  - logout()
+  - signUp()
+  - toggleUserSetting()
+  - getUserSettings()
+
+/php/config -> Constant Variables
+
+/php/api -> App Database Interface
+- Library.php
+  - __construct()
+  - getLibrary()
+  - getBookByIsbn()
+  - getBookById()
+  - getBookByUser()
+  - addBook()
+  - deleteBook()
+  - searchLibrary()
+  - toggleReadStatus()
+  - Libarary Controller Logic
+- Users.php
+  - __construct()
+  - login()
+  - signUp()
+  - getUserByEmail()
+  - toggleUserSetting()
+  - getUserSettings()
+  - Users Controller Logic
+
+## TODO
 - make responsive
-- change ugly error color
 - rating stars
 - add sessions with log in/out (cant do on localhost due to different ports)
 - hash passwords
 - error handling with async code
 - redirect after sign up
+- separate Library/Users controller logic from classes
 
-#### Bugs
+## Bugs
 - search bar: if text is left in bar, label floats over text
