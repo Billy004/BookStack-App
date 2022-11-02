@@ -23,10 +23,6 @@
   border : 2px solid hsl(var(--clr-sec));
 }
 
-.btn-ter {
-  
-}
-
 .btn-sec:hover, .btn-sec:focus {
   border : 2px solid hsl(var(--clr-pri-dark));
 }
@@ -69,4 +65,15 @@
 .btn-more-book-info:hover span,
 .btn-more-book-info:focus span {
   background-color: hsl( var(--clr-sec-dark) );
+}
+
+.close-btn {
+  content : '✖';
+  padding : 0.5rem;
+  background-color : transparent;
+  border : 0;
+  outline : 0;
+  font-weight: 900;
+  font-size : 1.5rem;
+  cursor : pointer;
 }
