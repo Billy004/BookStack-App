@@ -32,7 +32,11 @@ export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrar
     }
 
     // Update UI
-    const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod)
+    const updatedLibrary = await LIBRARYMODEL.getLibrary({
+      userId : user.id, 
+      sortMethod, 
+      filterMethod
+    })
     setLibrary(updatedLibrary)
 
   }
