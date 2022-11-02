@@ -6,9 +6,7 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
 
   const wrapper = useRef()
 
-    
-
-  async function oldhandleSubmit(e) {
+  async function handleSubmit(e) {
     
     e.preventDefault()
     
@@ -65,7 +63,7 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
       userId : user.id,
     }
 
-    const response = await LIBRARYMODEL.addBook(newBook)
+    await LIBRARYMODEL.addBook(newBook)
 
     // Update Library in UI
     const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod)
@@ -82,52 +80,6 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
       linkText : 'View Book'
     })
 
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault()
-
-    // Attempt to add book
-    const response = await LIBRARYMODEL.addBook({
-        isbn : e.target[0].value,
-        bookIsRead : e.target[1].checked,
-        userId : user.id,
-        library
-    })
-
-    if(!response.error) { // Successfully added book
-
-      // Update library state and UI
-      const updatedLibrary = await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod)
-      setLibrary(updatedLibrary)
-  
-      // Close Add Book Form
-      setUserAction(false)
-  
-      // Update flash message
-      setFlash({
-        message : `${ response.title } Added Successfully`,
-        type : 'success',
-        link : `#${ e.target[0].value }`,
-        linkText : 'View Book'
-      })
-
-    } else { // Failure adding book
-
-      const errorMsg = {
-        noIsbn : 'Please Enter a 10 or 13 digit ISBN. Only letters and numbers are allowed.',
-        userHasBook : 'This book is already in your library.',
-        googleFailure : 'Something went wrong with Google\'s API.',
-        noBookFound : 'This book doesn\'t exist on Google\'s API.',
-        tryCatchFailure : 'Something went wrong with fetching data for this book.' 
-      } 
-
-      setFlash({
-        message : errorMsg[response.error],
-        type : 'fail'
-      })
-      
-    }
   }
 
 

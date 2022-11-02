@@ -23,17 +23,54 @@ export default class LibraryModel {
 
 
 
-  async addBook(data) {
-    // Called by handleAddBook im <AddBookForm />. userHasBook already checked.
+  async addBook({isbn, bookIsRead, library, userId}) {
+    // console.log(`isbn: ${isbn} | bookIsRead : ${bookIsRead} | library : ${library.length}`)
 
-    const requestOptions = {
-      method : 'POST',
-      headers : { 'Content-Type': 'application/json' },
-      body : JSON.stringify(data)
+    // Check if isbn is entered
+    if (!isbn) return { error : 'noIsbn'}
+
+    // Check if book is already in library
+    if( library.find( book => book.isbn === isbn ) ) return { error : 'userHasBook' }
+
+    // Get Book Data from Google. I should probably hide this key =)
+    try {
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=AIzaSyDMCCAwAVRo5YHS07hVrUDtBCzx1VPEcTo`)
+
+      if (!response.ok) return { error : 'googleFailure' }
+
+      const data = await response.json()
+
+      // Check if book was found in Google API
+      if ( data.totalItems === 0 ) return { error : 'noBookFound' }
+
+      // Format New Book Data
+      const newBookData = {
+        isbn,
+        bookIsRead,
+        userId,
+        cover : (data.items[0].volumeInfo.imageLinks !== undefined) 
+                ? data.items[0].volumeInfo.imageLinks.thumbnail 
+                : false,
+        date : new Date().valueOf(),
+        title : data.items[0].volumeInfo.title,
+        author : data.items[0].volumeInfo.authors[0],
+        pages : data.items[0].volumeInfo.pageCount
+      }
+        
+      // Add to DB
+      const requestOptions = {
+        method : 'POST',
+        headers : { 'Content-Type': 'application/json' },
+        body : JSON.stringify(newBookData)
+      }
+
+      const dbResponse = await fetch(`${this.URLROOT}?action=addBook`, requestOptions)
+      return dbResponse.json()
+
+    } catch (err) {
+        console.log(`try/catch error : ${err}`)
+        return { error : 'tryCatchFailure' }
     }
-
-    await fetch(`${this.URLROOT}?action=addBook`, requestOptions)
-
 
   }
 

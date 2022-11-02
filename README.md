@@ -67,6 +67,7 @@ Users and books are stored in a MYSQL database, which is returned to an API with
 - error handling with async code
 - redirect after sign up
 - separate Library/Users controller logic from classes
+- add .htaccess file for React files
 
 ## Bugs
 - search bar: if text is left in bar, label floats over text
