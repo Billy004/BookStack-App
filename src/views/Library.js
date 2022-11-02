@@ -36,7 +36,11 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
   // Gets library from DB
   useEffect( () => {
     async function initLibrary() {
-      const lib =  await LIBRARYMODEL.getLibrary(user.id, sortMethod, filterMethod);
+      const lib =  await LIBRARYMODEL.getLibrary({
+        userId : user.id,
+        sortMethod,
+        filterMethod
+      });
       setLibrary(lib)
     }
   

@@ -6,7 +6,7 @@ export default class LibraryModel {
   // localhost
   URLROOT = 'http://localhost:80/projects/BookStack-App/bookstack-app/php/api/Library.php'
 
-  async getLibrary(userId, sortMethod, filterMethod) {
+  async getLibrary({userId, sortMethod, filterMethod}) {
     try {
 
       const data = await fetch(`${this.URLROOT}?action=getLibrary&query=${userId}&sort=${sortMethod}&filter=${filterMethod}`)
