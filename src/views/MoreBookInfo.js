@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import { Style } from "react-style-tag"
-import { getGoogleBookInfo } from "../utils/google"
+import { GOOGLEURL, GOOGLEKEY} from '../config/config.js'
 
 import imageNotAvailable from '../img/image-not-available.svg'
 import iconBack from '../img/icon-back.png'
@@ -34,11 +34,25 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
       setBookUserData(userRequest)
       setIsRead(userRequest.is_read)
 
-      const request = await getGoogleBookInfo(isbn)
-      setBook(request)
+      try {
+
+        const request = await fetch(GOOGLEURL + isbn + GOOGLEKEY)
+        if (!request.ok) throw new Error('Bad Request')
+
+        const data = await request.json()
+        if (data.totalItems === 0) throw new Error('No Book Found')
+
+        setBook(data.items[0].volumeInfo)
+        
+      } catch (err) {
+        setFlash({
+          type : 'fail',
+          message : `Error: ${err}`
+        })
+      }
     }
     getBook()
-  }, [isbn, LIBRARYMODEL, user.id])
+  }, [isbn, LIBRARYMODEL, user.id, setFlash])
 
 
   const {
@@ -136,7 +150,6 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
   {book.length === 0 && <LoadingSpinner /> } 
 
   <div className="book-more-info">
-
 
     <Link to="/library" className="book-more-info-back mb1">
       <img src={ iconBack } alt="Back to library" />
