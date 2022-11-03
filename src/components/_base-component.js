@@ -1,15 +1,20 @@
+import { Style } from "react-style-tag"
+
 export default function Base () {
 
-  const baseStyle = {
-    padding : '1rem',
-  }
 
   return(
-  <div style={ baseStyle }>
+  <>
+  <Style>{`
+  
+  `}</Style>
+
+  <div>
   
   
   
   </div>
 
+  </>
   )
 }

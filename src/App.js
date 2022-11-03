@@ -30,8 +30,7 @@ function App() {
   
   // Determines flash message
   // obj { message : 'Message to user', type : 'success or fail' } 
-  // const [flash, setFlash] = useState(false); // False or Obj
-  const [flash, setFlash] = useState({message : 'testing', type : 'fail'}); // False or Obj
+  const [flash, setFlash] = useState(false); // False or Obj
 
 
   // Get DB interaction classes
@@ -96,7 +95,7 @@ function App() {
 
       </Routes>
 
-      <Footer />
+      <Footer user={ user } />
 
     </div>
     </Router>

@@ -149,6 +149,8 @@ class Library {
 
 
 
+
+
 $library = new Library;
 $action = !empty($_GET['action']) ? $_GET['action'] : false;
 $query = !empty($_GET['query']) ? $_GET['query'] : false;
@@ -157,7 +159,7 @@ $query = !empty($_GET['query']) ? $_GET['query'] : false;
 
 if ($action == 'getBook' && !empty($query)) {
 
-  echo json_encode($library->getBookByIsbn($query),JSON_PRETTY_PRINT);
+  echo json_encode($library->getBookByIsbn($query), JSON_PRETTY_PRINT);
 
 
 

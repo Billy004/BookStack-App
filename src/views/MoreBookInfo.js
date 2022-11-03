@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
+import { Style } from "react-style-tag"
 import { getGoogleBookInfo } from "../utils/google"
 
 import imageNotAvailable from '../img/image-not-available.svg'
@@ -66,9 +67,76 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
 
   
   return(
+  <>
+  <Style>{`
+    .book-more-info-back {
+      display : flex;
+      align-items: center;
+      gap : 0.5rem;
+    }
+
+    .book-more-info-img-wrapper {
+      text-align: center;
+    }
+
+    .book-more-info-img {
+      /* width : 90%; */
+      height : 50vh;
+      border-radius: 10px;
+    }
+
+    .book-more-info-title {
+      text-align: center;
+    }
+
+    .book-more-info-authors,
+    .book-more-info-categories,
+    .book-more-info-rating,
+    .book-more-info-page-count {
+      display : block;
+      margin-block: 0.5rem;
+      text-align: center;
+      color : #717171;
+    }
+        
+    @media screen and (min-width : 750px) {
+
+      .book-more-info {
+        display : grid;
+        align-items: start;
+        column-gap: 5rem;
+        row-gap: 0;
+        grid-template-rows: auto;
+        grid-template-areas: 
+          "back back"
+          "cover rating"
+          "cover title"
+          "cover authors"
+          "cover categories"
+          "cover pages"
+          "cover description"
+          "user-actions user-actions";
+      }
+
+      .book-more-info * { text-align: left; }
+
+      .book-more-info-back { grid-area: back; }
+      .book-more-info-img-wrapper { grid-area: cover; }
+      .book-more-info-title { grid-area: title; }
+      .book-more-info-authors { grid-area: authors; }
+      .book-more-info-categories { grid-area: categories; }
+      .book-more-info-page-count { grid-area: pages; }
+      .book-more-info-rating { grid-area: rating; }
+      .book-more-info-description { grid-area: description; }
+      .book-more-info-user-actions { grid-area: user-actions; }
+      .book-more-info-user-actions > * { display : block; }
+    }
+  `}</Style>
+
+  {book.length === 0 && <LoadingSpinner /> } 
+
   <div className="book-more-info">
 
-    {book.length === 0 && <LoadingSpinner /> } 
 
     <Link to="/library" className="book-more-info-back mb1">
       <img src={ iconBack } alt="Back to library" />
@@ -146,6 +214,6 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
 
   
   </div>
-
+  </>
   )
 }

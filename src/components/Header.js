@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import Logo from './Logo'
+import { Style } from 'react-style-tag'
 
 export default function Header({ user, setUser }) {
 
@@ -11,6 +12,55 @@ export default function Header({ user, setUser }) {
 
   return(
     <>
+    <Style>{`
+      .logged-in {
+        text-align: right;
+      }
+      
+      nav {
+        padding-block : 1rem;
+        display : flex;
+        justify-content: space-between;
+        align-items: center;
+        width : 100%;
+        font-family: var(--style-font);
+      }
+      
+
+      
+      .nav-links { 
+        position: fixed;
+        z-index : 999;
+        inset : auto 0 0 0;
+        display : flex; 
+        align-items: center;
+        list-style-type: none;
+      
+        background-color: hsl(var(--clr-pri));
+      }
+      
+      nav li a {
+        font-weight: 600;
+        color : #fff;
+      }
+      
+      .active-nav-link {
+        border-bottom : 2px solid hsl(var(--clr-pri));
+      }
+      
+      @media screen and (min-width : 600px) {
+        .nav-links { 
+          position: static;
+          background : transparent;
+          gap : 1.5rem;
+        }
+        
+        nav li a {
+          color : #333;
+        }
+      }
+    `}</Style>
+
     {
     currentPage !== '/' &&
     

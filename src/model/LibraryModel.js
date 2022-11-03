@@ -24,7 +24,6 @@ export default class LibraryModel {
 
 
   async addBook({isbn, bookIsRead, library, userId}) {
-    // console.log(`isbn: ${isbn} | bookIsRead : ${bookIsRead} | library : ${library.length}`)
 
     // Check if isbn is entered
     if (!isbn) return { error : 'noIsbn'}
@@ -43,7 +42,7 @@ export default class LibraryModel {
       // Check if book was found in Google API
       if ( data.totalItems === 0 ) return { error : 'noBookFound' }
 
-      // Format New Book Data
+      // Everything good so far. Format New Book Data
       const newBookData = {
         isbn,
         bookIsRead,

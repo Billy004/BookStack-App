@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom"
+import { Style } from "react-style-tag"
 
 export default function MustLogin() {
 
-  const usersStyle = {
-    padding : '5rem 1rem',
-  }
-
   return(
-  <div style={ usersStyle }>
+  <>
+  <Style>{`
+    .must-login {
+      padding : 5rem 1rem;
+    }
+  `}</Style>
+
+  <section className="must-login">
   
     <div>
       <h2 className="mb1">Please Log In</h2>
@@ -17,7 +21,8 @@ export default function MustLogin() {
       </p>
     </div>
   
-  </div>
+  </section>
+  </>
 
   )
 }

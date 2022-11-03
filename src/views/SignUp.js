@@ -1,4 +1,5 @@
 import UserModel from "../model/UserModel"
+import { Style } from "react-style-tag"
 
 export default function SignUp({ setFlash }) {
 
@@ -47,34 +48,36 @@ export default function SignUp({ setFlash }) {
   }
 
   return(
+  <>
+  <Style>{`
+  
+  `}</Style>
   <div className="content-wrapper">
   
-  <>
-      <h3>Sign Up:</h3>
+    <h3>Sign Up:</h3>
 
-      <form onSubmit={ handleSignUp } >
-        
-        <label>
-          Email<br />
-          <input type="text" name="name" />
-        </label>
-        
-        <label>
-          Password<br />
-          <input type="password" name="password" />
-        </label>
+    <form onSubmit={ handleSignUp } >
+      
+      <label>
+        Email<br />
+        <input type="text" name="name" />
+      </label>
+      
+      <label>
+        Password<br />
+        <input type="password" name="password" />
+      </label>
 
-        <label>
-          Confirm Password<br />
-          <input type="password" name="confirmPassword" />
-        </label>
+      <label>
+        Confirm Password<br />
+        <input type="password" name="confirmPassword" />
+      </label>
 
-        <input type="submit" value="Sign Up" className="btn btn-pri" />
+      <input type="submit" value="Sign Up" className="btn btn-pri" />
 
-      </form>
-    </>
+    </form>
   
   </div>
-
+  </>
   )
 }

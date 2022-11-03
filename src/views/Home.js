@@ -1,5 +1,6 @@
 import UserModel from "../model/UserModel";
 import { Link } from "react-router-dom";
+import { Style } from "react-style-tag";
 import Logo from "../components/Logo";
 import heroImg from '../img/hero-img.png'
 
@@ -33,6 +34,42 @@ export default function Home({user, setUser, setFlash}) {
   }
 
   return(
+
+<>
+<Style>{`
+  .home-wrapper {
+    display : grid;
+    grid-template-columns: 1fr 0.75fr;
+    gap : 1rem;
+    min-height: 80vh;
+    padding : var(--padding-x-default); 
+  }
+
+  .hero h1 {
+    margin-top : 0;
+  }
+
+  .hero-wrapper {
+    padding : 2rem var(--padding-x-default);
+    background-color: hsla(0, 0%, 100%, 0.7);
+    border-radius: 10px;
+  }
+
+  .hero > .logo {
+    margin-bottom : 2rem;
+  }
+
+  .hero-welcome {
+    margin-bottom : 3rem;
+  }
+
+  .hero-img {
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+`}
+</Style>
 
 <section className="home-wrapper">
 
@@ -137,5 +174,6 @@ export default function Home({user, setUser, setFlash}) {
 
 
 </section>
+</>
   )
 }

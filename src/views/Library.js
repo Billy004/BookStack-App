@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Style } from "react-style-tag";
 import Book from "../components/Book";
 import AddBookForm from "../components/AddBookForm";
 import SearchBar from "../components/SearchBar"
@@ -59,7 +60,25 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
 
 
   return(
-  <div className="library-wrapper content-wrapper">
+<>
+  <Style>{`
+    .user-actions {
+      display : flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap : 1rem;
+      padding : 0rem var(--padding-x-default) 2rem;
+      width : 100%;
+    }
+
+    .library {
+      display : grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap : 1rem;
+    }
+  `}</Style>
+
+  <section className="content-wrapper">
 
     <div className="user-actions">
 
@@ -138,7 +157,7 @@ export default function Library ( { LIBRARYMODEL, USERMODEL ,setFlash, user } ) 
     }
     </div>
   
-  </div>
-
+  </section>
+</>
   )
 }

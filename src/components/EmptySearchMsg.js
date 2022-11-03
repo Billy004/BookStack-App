@@ -1,15 +1,21 @@
+import { Style } from "react-style-tag"
+
 export default function EmptySearchMsg () {
 
-  const baseStyle = {
-    padding : '1rem',
-  }
-
   return(
-  <div style={ baseStyle }>
+  <>
+  <Style>{`
+    .empty-search-msg {
+      padding : 1rem;
+    }
+  `}</Style>
+  
+  <div className="empty-search-msg">
   
     No Results found
   
   </div>
+  </>
 
   )
 }

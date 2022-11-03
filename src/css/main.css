@@ -3,14 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
 
 @import url('config.css');
-@import url('header.css');
 @import url('buttons.css');
 @import url('animations.css');
 @import url('utils.css');
-
-@import url('home.css');
-@import url('library.css');
-@import url('book-more-info.css');
 
 
 * {
@@ -39,10 +34,6 @@ a {
 
 a:hover, a:focus {
   color : hsl( var(--clr-sec-dark) );
-}
-
-button, button > * {
-  transition: var( --link-transition );
 }
 
 img {
@@ -82,17 +73,4 @@ input[type=text], input[type=password] {
 input[type=text]:hover, input[type=password]:hover,
 input[type=text]:focus, input[type=password]:focus {
   outline : 1px solid hsl(var(--clr-pri-dark));
-}
-
-button {
-  border : 0;
-  outline : 0;
-}
-
-
-.content-wrapper {
-  margin-bottom : 2rem;
-  padding : 2rem var(--padding-x-default);
-  background-color: hsla(0, 0%, 100%, 0.7);
-  border-radius: 10px;
 }

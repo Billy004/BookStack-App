@@ -1,18 +1,22 @@
+import { Style } from 'react-style-tag'
 import loadingSpinner from '../img/loading-spinner.svg'
 
 export default function LoadingSpinner () {
 
-  const baseStyle = {
-    padding : '1rem',
-    textAlign : 'center',
-  }
-
   return(
-  <div style={ baseStyle }>
+  <>
+  <Style>{`
+    .loading-spinner {
+      padding : 1rem;
+      text-align : center;
+    }
+  `}</Style>
 
-    <img src={ loadingSpinner } alt="" />  
+  <div className="loading-spinner">
+
+    <img src={ loadingSpinner } alt="Loading Book Info" />  
       
   </div>
-
+  </>
   )
 }

@@ -7,9 +7,7 @@
   to { opacity : 0; }
 }
 
-.slide-down { animation: slide-down 500ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden; }
-
-@keyframes slide-down {
+@keyframes expand-down {
   from {
     opacity : 0;
     max-height : 0;
@@ -20,9 +18,7 @@
   }
 }
 
-.slide-down-exit { animation: slide-down-exit 500ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden; }
-
-@keyframes slide-down-exit {
+@keyframes expand-down-exit {
   from {
     opacity : 1;
     max-height : 500px;
@@ -33,8 +29,3 @@
   }
 }
 
-
-.hover-expand { transition: all 200ms ease-in; transform-origin: bottom; }
-.hover-expand:hover {
-  transform: scale(1.05);
-}

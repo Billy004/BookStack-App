@@ -1,5 +1,6 @@
 
 import { useRef } from "react"
+import { Style } from "react-style-tag"
 
 export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary, setUserAction, setFlash, sortMethod, filterMethod } ) {
 
@@ -59,14 +60,39 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
 
 
   return(
-  <div className="user-actions-modal slide-down" ref={ wrapper }>
+  <>
+
+  <Style>{`
+    .add-book-form {
+      position : relative;
+      padding : 1rem;
+      border-radius: 10px;
+      background-color: hsl(210, 130%, 98%);
+    }
+    
+    .add-book-form-isOpening {
+      animation: expand-down 500ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden;
+    }
+
+    .add-book-form-isClosing {
+      animation: expand-down-exit 400ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden;
+    }
+
+    .user-actions-input {
+      display : inline-block;
+    }
+  
+  
+  `}</Style>
+  
+  <div className="add-book-form add-book-form-isOpening" ref={ wrapper }>
 
     <button
       className="btn btn-close-user-action"
       onClick={ (e) => {
         // console.log(e.target, 'eve')
-        wrapper.current.classList.remove('slide-down')
-        wrapper.current.classList.add('slide-down-exit')
+        wrapper.current.classList.remove('add-book-form-isOpening')
+        wrapper.current.classList.add('add-book-form-isClosing')
         setTimeout( () => {
           setUserAction(false) 
         }, 500)
@@ -106,6 +132,6 @@ export default function AddBookForm ( { LIBRARYMODEL, library, user, setLibrary,
     </form>
   
   </div>
-
+  </>
   )
 }

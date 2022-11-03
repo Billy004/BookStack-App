@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Style } from "react-style-tag";
 import UserModel from "../model/UserModel"
 
 
@@ -21,14 +22,52 @@ export default function ChangeSettings ({user, sortMethod, setSortMethod, filter
   }
 
   return(
-  <div className="user-actions-modal slide-down" ref={ wrapper }>  
+    <>
+
+    <Style>{`
+      .change-settings{
+        position : relative;
+        padding : 1rem;
+        border-radius: 10px;
+        background-color: hsl(210, 130%, 98%);
+      }
+  
+      .change-settings-isOpening {
+        animation: expand-down 500ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden;
+      }
+  
+      .change-settings-isClosing {
+        animation: expand-down-exit 400ms cubic-bezier(.17,.67,.57, .96) both; overflow: hidden;
+      }
+  
+
+      .user-actions-input {
+        display : inline-block;
+      }
+        
+    .setting, .setting-active {
+      display : inline-block;
+      padding : 0.5rem 1rem;
+      margin-right : 1rem;
+      background: transparent;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .setting-active {
+      background-color: hsl( var(--clr-sec) );
+      border-radius: 5px;
+    }
+  `}</Style>
+
+  <div className="change-settings change-settings-isOpening" ref={ wrapper }>  
 
   <button
       className="btn btn-close-user-action"
       onClick={ (e) => {
         // console.log(e.target, 'eve')
-        wrapper.current.classList.remove('slide-down')
-        wrapper.current.classList.add('slide-down-exit')
+        wrapper.current.classList.remove('change-settings-isOpening')
+        wrapper.current.classList.add('change-settings-isClosing')
         setTimeout( () => {
           setUserAction(false) 
         }, 500)
@@ -98,6 +137,6 @@ export default function ChangeSettings ({user, sortMethod, setSortMethod, filter
     </div>
   
   </div>
-
+  </>
   )
 }

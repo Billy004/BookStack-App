@@ -1,19 +1,27 @@
-export default function Footer () {
+import { Style } from "react-style-tag"
 
-  const footerStyle = {
-    padding : '5rem',
-    backgroundColor : '#0F0A44',
-    color : '#fff',
-    borderRadius : '0.3rem',
-    textAlign : 'center',
-  }
+export default function Footer ({ user }) {
 
   return(
-  <div style={ footerStyle }>
+    <>
+  <Style>{`
+    .footer {
+      padding-block : 2rem;
+      background-color : hsl( var(--clr-pri-ex-dark) );
+      color : #fff;
+      border-radius : 0.3rem;
+      text-align : center;
+    }
   
+  `}</Style>
+
+  <div className="footer">
+    {
+    user && <p>Logged in as {user.email}</p>
+    }
     Made By Josh =)
   
   </div>
-
+  </>
   )
 }

@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Style } from 'react-style-tag'
 import imageNotAvailable from '../img/image-not-available.svg'
 import iconIsRead from '../img/icon-book-isread.png'
 import iconIsNotRead from '../img/icon-book-notread.png'
@@ -50,6 +51,46 @@ export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrar
   }
 
   return(
+  <>
+  <Style>{`
+  
+    .book {
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .book:hover .book-btns,
+    .book:focus .book-btns{
+      opacity: 1;
+    }
+
+    .book-cover-img img {
+      width : 100%;
+      aspect-ratio: 1 / 1.5;
+      object-fit: cover;
+      transition: all 150ms ease-out;
+      transform-origin: bottom;
+    }
+
+    .book-cover-img img:hover {
+      transform: scale(1.05);
+    }
+
+    .book-btns {
+      position: absolute;
+      bottom : 0;
+      left : 0;
+      width : 100%;
+      display : flex;
+      justify-content: space-evenly;
+      padding : 5px;
+      background-color: hsla(214, 95%, 17%, 0.7);
+      opacity: 0.5;
+    }
+
+  `}</Style>
+
   <div id={ isbn } className="book">
 
     <div className='book-cover-img'>
@@ -93,6 +134,6 @@ export default function Book ({bookData, LIBRARYMODEL, user, setFlash, setLibrar
     </div>
   
   </div>
-
+  </>
   )
 }
