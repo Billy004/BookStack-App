@@ -60,11 +60,9 @@ Users and books are stored in a MYSQL database, which is returned to an API with
   - Users Controller Logic
 
 ## TODO
-- make responsive
 - rating stars
 - add sessions with log in/out (cant do on localhost due to different ports)
 - hash passwords
-- error handling with async code
 - redirect after sign up
 - separate Library/Users controller logic from classes
 - add .htaccess file for React files

@@ -81,7 +81,7 @@ export default function Header({ user, setUser }) {
       
       .nav-user-li {
         left : 0;
-        text-align : center;
+        text-align : right;
       }
       
       .nav-logout-li {
@@ -105,7 +105,15 @@ export default function Header({ user, setUser }) {
           display : none;
         }
         
-        
+        .mobile-menu-isOpen {
+          position : relative;
+          bottom : 0;
+          display : block;
+          width : auto;
+          height : auto;
+          padding : 0;
+          background : transparent;
+        }
       }
     `}</Style>
 

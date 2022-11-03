@@ -1,9 +1,12 @@
 import UserModel from "../model/UserModel"
 import { Style } from "react-style-tag"
+import { useNavigate } from "react-router-dom"
 
 export default function SignUp({ setFlash }) {
 
   const USERMODEL = new UserModel()
+
+  const navigate = useNavigate()
 
   async function handleSignUp(e) {
     e.preventDefault()
@@ -28,9 +31,14 @@ export default function SignUp({ setFlash }) {
 
     // Handle sign up attempt
     if(isSignedUp && (isSignedUp !== 'duplicate')) {
+
+      setTimeout( () => { navigate('/') }, 5000 )
+
       setFlash({
-        message : `${isSignedUp}, you have successfully signed up to BookStack!`,
-        type : 'success'
+        message : `${isSignedUp}, you have successfully signed up to BookStack! Redirecting to login page`,
+        type : 'success',
+        link : '/',
+        linkText : 'Log In'
       })
     } else if (isSignedUp === 'duplicate') {
       setFlash({

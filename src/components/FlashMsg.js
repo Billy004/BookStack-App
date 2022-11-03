@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
 import { Style } from "react-style-tag"
 
 export default function FlashMsg ({ flash, setFlash }) {
@@ -57,7 +58,12 @@ export default function FlashMsg ({ flash, setFlash }) {
         <span className="flash-message">
           { flash.message } 
         </span>
-        { flash.link && flash.linkText && <a href={ flash.link }>{ flash.linkText }</a> }
+        { 
+        flash.link && flash.linkText && 
+          <Link to={ flash.link } onClick={ () => setFlash(false) }>
+            { flash.linkText }
+          </Link> 
+        }
       </div>
 
       <div>
