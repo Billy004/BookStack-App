@@ -37,12 +37,15 @@ export default function Home({user, setUser, setFlash}) {
 
 <>
 <Style>{`
-  .home-wrapper {
-    display : grid;
-    grid-template-columns: 1fr 0.75fr;
-    gap : 1rem;
-    min-height: 80vh;
-    padding : var(--padding-x-default); 
+
+  @media screen and (min-width : 750px) {
+    .home-wrapper {
+      display : grid;
+      grid-template-columns: 1fr 0.75fr;
+      gap : 1rem;
+      min-height: 80vh;
+      padding : var(--padding-x-default); 
+    }
   }
 
   .hero h1 {
@@ -55,7 +58,7 @@ export default function Home({user, setUser, setFlash}) {
     border-radius: 10px;
   }
 
-  .hero > .logo {
+    .hero > .logo {
     margin-bottom : 2rem;
   }
 
@@ -64,6 +67,7 @@ export default function Home({user, setUser, setFlash}) {
   }
 
   .hero-img {
+    min-height : 25vh;
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
@@ -123,13 +127,15 @@ export default function Home({user, setUser, setFlash}) {
       <p>
         
         <Link to="/library">
-          <button className="btn btn-pri mr2">
+          <button className="btn btn-pri mr2 mb1">
             View your library
           </button>
         </Link>
 
-        <Link to="/library">
+        <Link to="/about">
+            <button className="btn btn-sec">
             Learn about this app
+            </button>
         </Link>
       </p>
       </>

@@ -1,14 +1,17 @@
 import { Link, useLocation } from 'react-router-dom'
 import Logo from './Logo'
 import { Style } from 'react-style-tag'
+import { useState } from 'react'
 
 export default function Header({ user, setUser }) {
 
   function loseFocus() {
     document.activeElement.blur()
   }
-  
+
   const currentPage = useLocation().pathname
+
+  const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(true)
 
   return(
     <>
@@ -26,38 +29,83 @@ export default function Header({ user, setUser }) {
         font-family: var(--style-font);
       }
       
-
-      
       .nav-links { 
         position: fixed;
         z-index : 999;
         inset : auto 0 0 0;
+        padding-block : 1rem;
+
         display : flex; 
+        justify-content : space-around;
         align-items: center;
+        
         list-style-type: none;
       
-        background-color: hsl(var(--clr-pri));
+        border-top : 2px solid #bbb;
+        background-color : hsl(0, 0%, 100%, 0.97);
       }
       
       nav li a {
         font-weight: 600;
-        color : #fff;
+        color : #333;
       }
       
       .active-nav-link {
         border-bottom : 2px solid hsl(var(--clr-pri));
       }
+
+      .nav-user {
+        font-weight : bold;
+      }
+      
+      .mobile-menu-hidden {
+        display : none;
+      }
+
+      .mobile-menu-visible {
+        display : block;
+      }
+
+      .mobile-menu-isOpen {
+        position : absolute;
+        bottom : 100%;
+
+        display : grid;
+        align-items : center;
+
+        width : 50%;
+        height : 15vh;
+        padding : 1rem;
+        background-color : hsl(0, 0%, 100%, 0.95);
+      }
+      
+      .nav-user-li {
+        left : 0;
+        text-align : center;
+      }
+      
+      .nav-logout-li {
+        right : 0;
+      }
       
       @media screen and (min-width : 600px) {
+        
         .nav-links { 
-          position: static;
+          position: relative;
           background : transparent;
           gap : 1.5rem;
+          border : 0;
         }
         
-        nav li a {
-          color : #333;
+        .mobile-menu-hidden {
+          display : block;
         }
+  
+        .mobile-menu-visible {
+          display : none;
+        }
+        
+        
       }
     `}</Style>
 
@@ -98,10 +146,18 @@ export default function Header({ user, setUser }) {
         </li>
         {
         user ?
-        <>
-        <li><span className="bold">{ user.email }</span></li>
-        <li><button className="btn btn-sec" onClick={ () => setUser(false) }>Log Out</button></li>
-        </>
+          <>
+          
+          <li className={ mobileMenuIsOpen ? 'mobile-menu-isOpen nav-user-li' : 'mobile-menu-hidden' }>
+            <span className="nav-user">{ user.email }</span>
+          </li>
+          <li className={ mobileMenuIsOpen ? 'mobile-menu-isOpen nav-logout-li' : 'mobile-menu-hidden' }>
+            <button className="btn btn-sec" onClick={ () => setUser(false) }>Log Out</button>
+          </li>
+          <li className="mobile-menu-visible">
+            <button className="mobile-menu-icon" onClick={ () => { setMobileMenuIsOpen(!mobileMenuIsOpen) } }>|||</button>
+          </li>
+          </>
         : <li><Link to="/sign-up" >Sign Up</Link></li>
         }
       </ul>
