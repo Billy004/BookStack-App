@@ -46,12 +46,13 @@ export default function SearchLibrary ({LIBRARYMODEL, setLibrary, user, sortMeth
     }
     
     .search-bar-input[type=text] {
-      width : 600px;
+      width : 90vw;
       max-width : 400px;
       margin : 0;
     }
-    
-    .search-bar-input:focus + .search-label {
+
+    .search-bar-input:focus + .search-label,
+    .search-bar-input:valid + .search-label {
       top : 0;
       transform: translateY(-1.3rem);
     }
@@ -70,6 +71,7 @@ export default function SearchLibrary ({LIBRARYMODEL, setLibrary, user, sortMeth
         type="text" 
         onChange={ handleSearch } 
         className="search-bar-input"
+        required
         />
       <span className="search-label">Search your library</span>
       <img src={ searchIcon } className="search-icon" alt="Search" />

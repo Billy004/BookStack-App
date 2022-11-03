@@ -70,4 +70,3 @@ Users and books are stored in a MYSQL database, which is returned to an API with
 - add .htaccess file for React files
 
 ## Bugs
-- search bar: if text is left in bar, label floats over text
