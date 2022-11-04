@@ -1,10 +1,10 @@
 export default class UserModel {
 
   // joshkaye.ca
-  // URLROOT = '/projects/bookstack-app/php/api/Users.php'
+  URLROOT = '/projects/bookstack-app/php/api/Users.php'
 
   // localhost
-  URLROOT = 'http://localhost:80/projects/BookStack-App/bookstack-app/php/api/Users.php'
+  // URLROOT = 'http://localhost:80/projects/BookStack-App/bookstack-app/php/api/Users.php'
 
   async login(email, pass) {
 

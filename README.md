@@ -1,6 +1,6 @@
 # BookStack
 ## Keep Track of your book library!
-### Version number 1.0.0
+### Version number 1.1.0
 
 BookStack is a custom Full-Stack web app that I programmed from the ground up as a portfolio project.
 View the project here:
@@ -60,7 +60,6 @@ Users and books are stored in a MYSQL database, which is returned to an API with
   - Users Controller Logic
 
 ## TODO
-- rating stars
 - add sessions with log in/out (cant do on localhost due to different ports)
 - add .htaccess file for React files
 - remove LibraryModel/UserModel Classes and convert to functions?
