@@ -50,7 +50,8 @@ class Users {
       if (empty($user)) return false;
       // TODO: implement Hashed Passwords
 
-      if ($loginData["password"] == $user->password) {
+      // if ($loginData["password"] == $user->password) {
+      if ( password_verify($loginData['password'], $user->password) ) {
         return $user;
       } else {
         return false;
@@ -63,7 +64,8 @@ class Users {
 
 
   public function signUp($loginData) {
-
+    
+    $loginData['password'] = password_hash($loginData['password'], PASSWORD_DEFAULT);
    
     $this->stmt = $this->dbh->prepare('INSERT INTO users (email, password) VALUES (:email, :password)');
 
