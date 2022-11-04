@@ -9,6 +9,7 @@ import iconBookIsRead from '../img/icon-book-isread.png'
 import iconBookNotRead from '../img/icon-book-notread.png'
 import iconDeleteBook from '../img/icon-delete-book.png'
 
+import RatingStars from "../components/RatingStars.js"
 import LoadingSpinner from "../components/LoadingSpinner"
 
 export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
@@ -77,8 +78,6 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
   
   // Book is read State
   const [isRead, setIsRead] = useState()
-  
-
   
   return(
   <>
@@ -171,7 +170,14 @@ export default function MoreBookInfo ({user, LIBRARYMODEL, setFlash}) {
     <span className="book-more-info-authors">By: {authors}</span>
     <span className="book-more-info-categories">{categories}</span>
     <span className="book-more-info-page-count">{pageCount} Pages</span>
-    <span className="book-more-info-rating">{averageRating} / 5 with {ratingsCount} ratings</span>
+
+      {
+      averageRating && 
+        <span className="book-more-info-rating">
+          <RatingStars rating={ averageRating } />&nbsp;
+          {ratingsCount} ratings
+      </span>
+      }
 
     <div className="book-more-info-description">
       <h3>Description</h3>
